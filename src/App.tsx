@@ -10,9 +10,9 @@ function App() {
       <ThemeProvider theme={theme}>
         <GlobalStyle />
         <Home/>
-        <Button text={"labelMd"} color={"pointOriginal"} round={"xl"} onClick={() => console.log("Clicked!")}>
+        <Button text={"labelMd"} color={"pointOriginal"} round={"xl"}>
           <img src={require("./assets/icon/icon_home.png")} alt="아이콘"/>
-          버튼입니다.
+          빵가루
         </Button>
       </ThemeProvider>
     </div>
