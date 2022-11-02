@@ -1,4 +1,4 @@
-const text = {
+const TEXT = {
   labelSm: `
     font-size: 10px;
     line-height: 12px;
@@ -51,7 +51,7 @@ const text = {
   `,
 }
 
-const color = {
+const COLOR = {
   pointWhite: "#FEEFED",
   pointOriginal: "#F55C47",
   pointBlack: "#C44A39",
@@ -62,7 +62,7 @@ const color = {
   secondOriginal: "#564A4A",
 }
 
-const round = {
+const ROUND = {
   xs: "4px",
   sm: "8px",
   md: "16px",
@@ -71,9 +71,9 @@ const round = {
 }
 
 const theme = {
-  text,
-  color,
-  round,
+  TEXT,
+  COLOR,
+  ROUND,
 }
 
 export default theme;

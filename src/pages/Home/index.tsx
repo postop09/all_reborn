@@ -12,5 +12,5 @@ const Index = () => {
 export default Index;
 
 const Title = styled.p`
-  ${({theme}) => theme.text.headerMd}
+  ${({theme}) => theme.TEXT.headerMd};
 `
