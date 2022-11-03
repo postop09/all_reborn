@@ -3,87 +3,35 @@ import styled from "styled-components";
 
 type Base = {
   text: string;
-  color: string;
+  color: "keyWhite" | "keyOriginal";
   round: string;
+  border?: "Y" | "N";
 }
 
 interface ButtonProps extends Base {
+  onClick: () => void;
   children: React.ReactNode | React.ReactNode[];
 }
 
 const Button = (props: ButtonProps) => {
-  console.log(props);
-  const children = props.children;
-
-  const renderArray = () => {
-    if (Array.isArray(children)) {
-      return (
-        <Wrapper style={props}>
-          {children.map((child) => {
-            return (
-                <Contents type="button">
-                  {child}
-                </Contents>
-            )
-          })}
-        </Wrapper>
-      )
-    }
-  };
-
-  const renderSingle = () => {
-    return (
-      <SingleButton style={props}>
-        {children}
-      </SingleButton>
-    )
-  };
+  const {text, color, round, border, children, onClick} = props;
 
   return (
-    <>
-      {Array.isArray(children) ?
-        renderArray()
-        :
-        renderSingle()
-      }
-    </>
+    <CustomButton text={text} round={round} border={border} color={color} onClick={onClick}>
+      {children}
+    </CustomButton>
   )
 };
 
 export default Button;
 
-const Wrapper = styled.span`
+const CustomButton = styled.button<Base>`
   display: flex;
   align-items: center;
   width: fit-content;
   padding: 4px 12px;
-  ${({theme}) => theme.TEXT.labelMd};
-  border-radius: ${({theme}) => theme.ROUND.xs};
-  background-color: ${(props) => {
-    const style = props.style;
-    const userColor = style && style.color;
-    const theme = props.theme;
-    return userColor && theme.COLOR[userColor];
-  }};
-`
-const Contents = styled.button`
-  display: block;
-  padding: 0;
-  height: 100%;
-  background: none;
-`
-
-const SingleButton = styled.button`
-  display: flex;
-  align-items: center;
-  width: fit-content;
-  padding: 4px 12px;
-  ${({theme}) => theme.TEXT.labelMd};
-  border-radius: ${({theme}) => theme.ROUND.xs};
-  background-color: ${(props) => {
-    const style = props.style;
-    const userColor = style && style.color;
-    const theme = props.theme;
-    return userColor && theme.COLOR[userColor];
-  }};
+  ${({text, theme}) => theme.TEXT[text]}
+  border: ${({border}) => border === "Y" ? "2px solid #4AA96C" : "none"};
+  border-radius: ${({round, theme}) => theme.ROUND[round]};
+  background-color: ${({color, theme}) => theme.COLOR[color]};
 `
