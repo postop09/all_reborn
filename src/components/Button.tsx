@@ -5,7 +5,8 @@ type Base = {
   text: string;
   color: "keyWhite" | "keyOriginal";
   round: string;
-  border?: "Y" | "N";
+  border?: boolean;
+  clickable?: boolean;
   onClick?: () => void;
 };
 interface Button extends Base {
@@ -17,10 +18,10 @@ interface TwoWayButton extends Base {
 
 // 1. 한가지 역할만 하는 버튼
 export const OneWayButton = (props: Button) => {
-  const {text, color, round, border, children, onClick} = props;
+  const {children, onClick} = props;
 
   return (
-    <CustomButton text={text} round={round} border={border} color={color} onClick={onClick}>
+    <CustomButton {...props} onClick={onClick}>
       {children}
     </CustomButton>
   )
@@ -28,10 +29,10 @@ export const OneWayButton = (props: Button) => {
 
 // 2. X 버튼 등 서로 다른 역할을 하는 contents 인 버튼
 export const TwoWayButton = (props: TwoWayButton) => {
-  const {text, color, round, border, children} = props;
+  const {children} = props;
 
   return (
-    <CustomButton text={text} round={round} border={border} color={color}>
+    <CustomButton {...props}>
       {children.map((child, index) => {
         return (
           <React.Fragment key={index}>
@@ -50,7 +51,8 @@ const CustomButton = styled.button<Base>`
   width: fit-content;
   padding: 4px 12px;
   ${({text, theme}) => theme.TEXT[text]}
-  border: ${({border}) => border === "Y" ? "2px solid #4AA96C" : "none"};
+  border: ${({border}) => border ? "2px solid #4AA96C" : "none"};
   border-radius: ${({round, theme}) => theme.ROUND[round]};
   background-color: ${({color, theme}) => theme.COLOR[color]};
+  cursor: ${({clickable}) => clickable ? "default" : "pointer"};
 `;
