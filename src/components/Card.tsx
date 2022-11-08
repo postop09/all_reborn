@@ -47,7 +47,7 @@ const Card = (props: CardProps) => {
   };
 
   return (
-    <Wrapper>
+    <Li>
       <ImgWrapper type="button" onClick={onDetail}>
         <Img src="" alt="이미지"/>
       </ImgWrapper>
@@ -70,13 +70,13 @@ const Card = (props: CardProps) => {
       <LikeBtn type="button" onClick={onLike}>
         <Icon16 src={require(`../assets/icon/${like ? "icon_like.png" : "icon_like_empty.png"}`)} alt="좋아요"/>
       </LikeBtn>
-    </Wrapper>
+    </Li>
   );
 };
 
 export default Card;
 
-const Wrapper = styled.li`
+const Li = styled.li`
   display: flex;
   border: 1px solid gray;
   border-radius: 4px;

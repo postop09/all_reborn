@@ -66,9 +66,10 @@ const GlobalStyle = createGlobalStyle`
   }
   
   button {
-    cursor: pointer;
     border: none;
+    padding: 0;
     background: none;
+    cursor: pointer;
   }
   
   img {
