@@ -4,9 +4,12 @@ import Home from "./pages/Home";
 import GlobalStyle from "./style/GlobalStyle";
 import {OneWayButton, TwoWayButton} from "./components/Button";
 import {Icon16} from "./style/style";
-import Card from "./components/Card";
+import {useEffect, useState} from "react";
+import CardList from "./components/CardList";
 
 function App() {
+  const [list, setList] = useState([]);
+
   const onClick = () => {
     console.log("CLICKED!");
   }
@@ -19,9 +22,16 @@ function App() {
     console.log("CLOSED!");
   }
 
-  const cont = "당신 그대로의 모습으로 미움받는 것이 당신답지 못한 모습으로 사랑받는 것보다 낫다. 나는 자연에 가까워졌고 이제 이 세상이 주는 아름다움에 감사할 수 있게 되었다."
-  const recycleList = ["플라스틱", "캔", "비닐", "건전지", "종이"];
+  useEffect( () => {
+    fetchList();
+  }, []);
 
+  const fetchList = async () => {
+    const res = await fetch("/list");
+    const json = await res.json();
+    const data = json.data;
+    setList(data);
+  }
 
   return (
     <div>
@@ -36,7 +46,7 @@ function App() {
           <span onClick={onClick2}>선택가능</span>
           <Icon16 src={require("./assets/icon/icon_close.png")} alt="삭제" onClick={onClick3}/>
         </TwoWayButton>
-        <Card way={"수거방법"} img={"icon_home.png"} contents={cont} recycle={recycleList} title={"프라이탁"}/>
+        <CardList data={list}/>
       </ThemeProvider>
     </div>
   );

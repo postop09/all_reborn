@@ -1,6 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './App';
+import {worker} from "./mocks/browser";
+if (process.env.NODE_ENV === 'development') {
+  const { worker } = require('./mocks/browser')
+  worker.start()
+}
 
 /**
  * createRoot 가 기대하는 type 과 getElementById 가 기대하는 type 이 일치하지 않는다.

@@ -2,16 +2,9 @@ import React, {useState} from 'react';
 import styled from "styled-components";
 import {Icon16} from "../style/style";
 import {OneWayButton} from "./Button";
+import {CardProps} from "../util/type";
 
-type Card = {
-  title: string;
-  img: string;
-  way: string;
-  recycle: string[];
-  contents: string;
-}
-
-const Card = (props: Card) => {
+const Card = (props: CardProps) => {
   const {title, way, contents, recycle, img} = props;
   const recycleList = recycle.slice(0, 3);
   const [like, setLike] = useState(false);
@@ -30,7 +23,7 @@ const Card = (props: Card) => {
   return (
     <Wrapper>
       <ImgWrapper type="button" onClick={onDetail}>
-        <Img src={require(`../assets/icon/${img}`)} alt="이미지"/>
+        <Img src="" alt="이미지"/>
       </ImgWrapper>
       <ContentWrapper>
         <TitleWrapper>
@@ -46,7 +39,7 @@ const Card = (props: Card) => {
             })
           }
         </RecycleList>
-        <TxtContents>{contents}당신 그대로의 모습으로 미움받는 것이 당신답지 못한 모습으로 사랑받는 것보다 낫다. 나는 자연에 가까워졌고 이제 이 세상이 주는 아름다움에 감사할 수 있게 되었다.</TxtContents>
+        <TxtContents>{contents}</TxtContents>
       </ContentWrapper>
       <LikeBtn type="button" onClick={onLike}>
         <Icon16 src={require(`../assets/icon/${like ? "icon_like.png" : "icon_like_empty.png"}`)} alt="좋아요"/>
@@ -117,4 +110,5 @@ const LikeBtn = styled.button`
 const Img = styled.img`
   width: 109px;
   height: 109px;
+  background: #D9D9D9;
 `
