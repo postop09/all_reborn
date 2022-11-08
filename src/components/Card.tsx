@@ -1,13 +1,26 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import styled from "styled-components";
-import {Icon16} from "../style/style";
+import {Icon16, Img} from "../style/style";
 import {OneWayButton} from "./Button";
 import {CardProps} from "../util/type";
 
 const Card = (props: CardProps) => {
-  const {title, way, contents, recycle, img} = props;
+  const {title, way, contents, recycle, img, id} = props;
   const recycleList = recycle.slice(0, 3);
   const [like, setLike] = useState(false);
+
+  useEffect(() => {
+    const storage = localStorage.getItem("likes");
+    if (storage) {
+      const arr = JSON.parse(storage);
+      const test = arr.filter((item: number) => item === id);
+      if (test.length > 0) {
+        setLike(true);
+      } else {
+        setLike(false);
+      }
+    }
+  }, []);
 
   // 상세조회
   const onDetail = () => {
@@ -16,8 +29,21 @@ const Card = (props: CardProps) => {
 
   // 좋아요
   const onLike = () => {
-    console.log("Like!");
     setLike((prev) => !prev);
+    const storage = localStorage.getItem("likes");
+    if (!storage) {
+      localStorage.setItem("likes", JSON.stringify([id]));
+    } else {
+      const arr = JSON.parse(storage);
+      const test = arr.filter((item: number) => item === id);
+      if (test.length > 0) {
+        const filter = arr.filter((item: number) => item !== id);
+        localStorage.setItem("likes", JSON.stringify(filter));
+      } else {
+        arr.push(id);
+        localStorage.setItem("likes", JSON.stringify(arr));
+      }
+    }
   };
 
   return (
@@ -52,7 +78,7 @@ export default Card;
 
 const Wrapper = styled.li`
   display: flex;
-  border: 1px solid black;
+  border: 1px solid gray;
   border-radius: 4px;
   width: 343px;
 `
@@ -105,10 +131,4 @@ const TxtContents = styled.p`
 const LikeBtn = styled.button`
   height: fit-content;
   margin-top: auto;
-`
-
-const Img = styled.img`
-  width: 109px;
-  height: 109px;
-  background: #D9D9D9;
 `
