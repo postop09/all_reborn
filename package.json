@@ -44,7 +44,8 @@
   },
   "devDependencies": {
     "@types/styled-components": "^5.1.26",
-    "msw": "^0.47.4"
+    "msw": "^0.47.4",
+    "prettier": "^2.7.1"
   },
   "msw": {
     "workerDirectory": "public"

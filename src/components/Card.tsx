@@ -78,7 +78,7 @@ export default Card;
 
 const Li = styled.li`
   display: flex;
-  border: 1px solid gray;
+  border: 1px solid lightgray;
   border-radius: 4px;
   width: 343px;
 `
@@ -96,13 +96,13 @@ const ImgWrapper = styled.button`
 const ContentWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: space-evenly;
-  padding-left: 4px;
+  padding: 12.5px 4px 12.5px 8px;
   word-break: keep-all;
 `
 
 const RecycleList = styled.ul`
   display: flex;
+  margin: 8px 0;
   ${({theme}) => theme.TEXT.bodyMd}
 `
 
@@ -125,10 +125,10 @@ const TxtContents = styled.p`
   text-overflow: ellipsis;
   overflow: hidden;
   -webkit-box-orient: vertical;
-  -webkit-line-clamp: 3;
+  -webkit-line-clamp: 2;
 `
 
 const LikeBtn = styled.button`
   height: fit-content;
-  margin-top: auto;
+  margin: auto 8px 4px auto;
 `

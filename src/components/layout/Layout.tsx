@@ -1,18 +1,24 @@
-import React from 'react';
+import React from "react";
 import Header from "./Header";
-import {Outlet} from "react-router-dom";
+import { Outlet } from "react-router-dom";
 import Footer from "./Footer";
+import styled from "styled-components";
 
 const Layout = () => {
   return (
-    <>
-      <Header/>
+    <Wrapper>
+      <Header />
       <main>
-        <Outlet/>
+        <Outlet />
       </main>
-      <Footer/>
-    </>
+      <Footer />
+    </Wrapper>
   );
 };
 
 export default Layout;
+
+const Wrapper = styled.div`
+  max-width: 428px;
+  margin: auto;
+`;
