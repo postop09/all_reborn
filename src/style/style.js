@@ -6,7 +6,7 @@ export const Icon16 = styled.img`
   margin-bottom: 2px;
 `
 
-export const Img = styled.img`
+export const ImgCard = styled.img`
   width: 109px;
   height: 109px;
   background: #D9D9D9;

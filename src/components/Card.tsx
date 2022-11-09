@@ -1,8 +1,10 @@
 import React, {useEffect, useState} from 'react';
 import styled from "styled-components";
-import {Icon16, Img} from "../style/style";
+import {Icon16, ImgCard} from "../style/style";
 import {OneWayButton} from "./Button";
 import {CardProps} from "../util/type";
+import ILike from "../assets/icon/icon_like.png";
+import ILikeEmpty from "../assets/icon/icon_like_empty.png";
 
 const Card = (props: CardProps) => {
   const {title, way, contents, recycle, img, id} = props;
@@ -49,7 +51,7 @@ const Card = (props: CardProps) => {
   return (
     <Li>
       <ImgWrapper type="button" onClick={onDetail}>
-        <Img src="" alt="이미지"/>
+        <ImgCard src="" alt="이미지"/>
       </ImgWrapper>
       <ContentWrapper>
         <TitleWrapper>
@@ -68,7 +70,7 @@ const Card = (props: CardProps) => {
         <TxtContents>{contents}</TxtContents>
       </ContentWrapper>
       <LikeBtn type="button" onClick={onLike}>
-        <Icon16 src={require(`../assets/icon/${like ? "icon_like.png" : "icon_like_empty.png"}`)} alt="좋아요"/>
+        <Icon16 src={like ? ILike : ILikeEmpty} alt="좋아요"/>
       </LikeBtn>
     </Li>
   );

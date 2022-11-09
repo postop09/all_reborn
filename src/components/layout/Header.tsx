@@ -2,6 +2,9 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { Icon16 } from "../../style/style";
 import { useNavigate } from "react-router-dom";
+import ILogo from "../../assets/image/img_logo.png";
+import ITitle from "../../assets/image/img_title.png";
+import ISearch from "../../assets/icon/icon_search.png";
 
 const Header = () => {
   const navigate = useNavigate();
@@ -25,17 +28,17 @@ const Header = () => {
       <Ul>
         <li>
           <button type="button" onClick={() => navigate("/")}>
-            <img src={require("../../assets/image/img_logo.png")} alt="" />
+            <img src={ILogo} alt="" />
           </button>
         </li>
         {pathName !== "/search" ? (
           <>
             <li>
-              <img src={require("../../assets/image/img_title.png")} alt="" />
+              <img src={ITitle} alt="" />
             </li>
             <li>
               <button type="button" onClick={() => navigate("/search")}>
-                <img src={require("../../assets/icon/icon_search.png")} alt="검색" />
+                <img src={ISearch} alt="검색" />
               </button>
             </li>
           </>
@@ -52,7 +55,7 @@ const Header = () => {
                 onChange={(e) => setSearch(e.target.value)}
               />
               <button type="submit">
-                <Icon16 src={require("../../assets/icon/icon_search.png")} alt="검색" />
+                <Icon16 src={ISearch} alt="검색" />
               </button>
             </form>
           </LiSearch>
@@ -65,6 +68,10 @@ const Header = () => {
 export default Header;
 
 const HeaderWrapper = styled.header`
+  position: fixed;
+  top: 0;
+  width: 100%;
+  max-width: 428px;
   background: white;
 `;
 

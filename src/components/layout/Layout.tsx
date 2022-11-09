@@ -8,9 +8,9 @@ const Layout = () => {
   return (
     <Wrapper>
       <Header />
-      <main>
+      <MainWrapper>
         <Outlet />
-      </main>
+      </MainWrapper>
       <Footer />
     </Wrapper>
   );
@@ -22,3 +22,7 @@ const Wrapper = styled.div`
   max-width: 428px;
   margin: auto;
 `;
+
+const MainWrapper = styled.main`
+  padding: 76px 0 82px;
+`
