@@ -1,19 +1,21 @@
-import {ThemeProvider} from "styled-components";
-import theme from "./style/theme";
 import Home from "./pages/Home";
-import GlobalStyle from "./style/GlobalStyle";
-import Header from "./components/layout/Header";
+import {BrowserRouter, Route, Routes} from "react-router-dom";
+import Layout from "./components/layout/Layout";
+import Search from "./pages/Search";
+import Error from "./pages/Error";
 
 function App() {
 
   return (
-    <>
-      <ThemeProvider theme={theme}>
-        <GlobalStyle/>
-        <Header/>
-        <Home/>
-      </ThemeProvider>
-    </>
+    <BrowserRouter>
+      <Routes>
+        <Route element={<Layout/>}>
+          <Route path="/" element={<Home/>}/>
+          <Route path="/search" element={<Search/>}/>
+          <Route path="/*" element={<Error/>}/>
+        </Route>
+      </Routes>
+    </BrowserRouter>
   );
 }
 
