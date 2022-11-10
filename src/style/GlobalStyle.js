@@ -84,7 +84,7 @@ const GlobalStyle = createGlobalStyle`
   .swiper-slide {
     text-align: center;
     font-size: 18px;
-    background: #5c7185;
+    background: #dddddd;
     /* Center slide text vertically */
     display: -webkit-box;
     display: -ms-flexbox;

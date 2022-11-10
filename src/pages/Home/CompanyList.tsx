@@ -27,5 +27,6 @@ const CompanyList = () => {
 export default CompanyList;
 
 const Title = styled.h3`
+  margin-bottom: 12px;
   ${({ theme }) => theme.TEXT.headerMd}
 `;

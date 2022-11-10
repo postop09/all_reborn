@@ -20,7 +20,7 @@ const cardSimpleJson = () => {
   let list = [];
   for (let i = 1; i < 11; i++) {
     const item = {
-      id: i,
+      id: i + 999,
       img: `icon_home${i}.png`,
       name: `이름${i}`,
     };

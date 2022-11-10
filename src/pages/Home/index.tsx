@@ -24,5 +24,6 @@ const HiddenTitle = styled.h2`
 `;
 
 const Wrapper = styled.div`
+  margin-top: 20px;
   padding: 0 16px;
 `;

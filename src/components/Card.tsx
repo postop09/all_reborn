@@ -62,7 +62,7 @@ const Li = styled.li`
   display: flex;
   border: 1px solid lightgray;
   border-radius: 4px;
-  width: 343px;
+  min-width: 280px;
 `;
 
 const TitleWrapper = styled.div`

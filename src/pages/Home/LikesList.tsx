@@ -37,7 +37,13 @@ const Title = styled.h3`
 
 const Ul = styled.ul`
   display: flex;
-  padding: 12px 0;
-  overflow-x: scroll;
   column-gap: 10px;
+  padding: 12px 0 20px;
+  overflow-x: scroll;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+
+  &::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Opera*/
+  }
 `;
