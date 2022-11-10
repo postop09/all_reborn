@@ -5,9 +5,11 @@ import { useNavigate } from "react-router-dom";
 import ILogo from "../../assets/image/img_logo.png";
 import ITitle from "../../assets/image/img_title.png";
 import ISearch from "../../assets/icon/icon_search.png";
+import * as enums from "../../const/enums";
 
 const Header = () => {
   const navigate = useNavigate();
+  const { ROUTES } = enums;
   const [pathName, setPathName] = useState("");
   const [search, setSearch] = useState("");
 
@@ -31,7 +33,7 @@ const Header = () => {
             <img src={ILogo} alt="" />
           </button>
         </li>
-        {pathName !== "/search" ? (
+        {pathName !== ROUTES.SEARCH ? (
           <>
             <li>
               <img src={ITitle} alt="" />
