@@ -56,6 +56,7 @@ const FooterWrapper = styled.footer`
   border-top-right-radius: ${({ theme }) => theme.ROUND.md};
   padding: 16px 0 24px;
   background: white;
+  z-index: 900;
 `;
 
 const Ul = styled.ul`

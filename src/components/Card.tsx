@@ -33,7 +33,7 @@ const Card = (props: CardProps) => {
   return (
     <Li>
       <ImgWrapper type="button" onClick={onDetail}>
-        <ImgCard src="" alt="이미지" />
+        <ImgCard src={img} alt="기업 상세조회" />
       </ImgWrapper>
       <ContentWrapper>
         <TitleWrapper>

@@ -1,8 +1,8 @@
-import {createGlobalStyle} from "styled-components";
+import { createGlobalStyle } from "styled-components";
 
 const GlobalStyle = createGlobalStyle`
   * {
-    font-family: spoqa;
+    font-family: "spoqa", "inherit";
     box-sizing: border-box;
   }
 
@@ -64,17 +64,17 @@ const GlobalStyle = createGlobalStyle`
   a {
     text-decoration: none
   }
-  
+
   button {
     border: none;
     padding: 0;
     background: none;
     cursor: pointer;
   }
-  
+
   img {
     display: block;
   }
-`
+`;
 
 export default GlobalStyle;

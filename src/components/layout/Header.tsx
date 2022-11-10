@@ -75,6 +75,7 @@ const HeaderWrapper = styled.header`
   width: 100%;
   max-width: 428px;
   background: white;
+  z-index: 1000;
 `;
 
 const HiddenTitle = styled.h1`
