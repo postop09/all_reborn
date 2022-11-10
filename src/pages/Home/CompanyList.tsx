@@ -6,10 +6,10 @@ const CompanyList = () => {
   const [list, setList] = useState([]);
 
   useEffect(() => {
-    fetchCardList();
+    fetchList();
   }, []);
 
-  const fetchCardList = async () => {
+  const fetchList = async () => {
     const res = await fetch("/list");
     const json = await res.json();
     const data = json.data;
