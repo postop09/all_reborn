@@ -6,10 +6,10 @@ const LikesList = () => {
   const [list, setList] = useState([]);
 
   useEffect(() => {
-    fetchSimpleList();
+    fetchList();
   }, []);
 
-  const fetchSimpleList = async () => {
+  const fetchList = async () => {
     const res = await fetch("/simplelist");
     const json = await res.json();
     const data = json.data;

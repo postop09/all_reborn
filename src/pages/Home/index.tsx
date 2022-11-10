@@ -1,7 +1,5 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import styled from "styled-components";
-import CardSimple from "../../components/CardSimple";
-import CardList from "../../components/CardList";
 import CompanyList from "./CompanyList";
 import LikesList from "./LikesList";
 
