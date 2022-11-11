@@ -51,7 +51,7 @@ const FooterWrapper = styled.footer`
   bottom: 0;
   width: 100%;
   max-width: 428px;
-  box-shadow: 0px -5px 7px 2px #00000040;
+  box-shadow: 0px -5px 7px 2px #00000020;
   border-top-left-radius: ${({ theme }) => theme.ROUND.md};
   border-top-right-radius: ${({ theme }) => theme.ROUND.md};
   padding: 16px 0 24px;

@@ -32,23 +32,12 @@ const Index = () => {
   };
   // MODAL TEST -------------------------------------
 
-  const onClick2 = () => {
-    console.log("OPENED!");
-  };
-
-  const onClick3 = () => {
-    console.log("CLOSED!");
-  };
   return (
     <>
       <OneWayButton text={"labelMd"} color={"keyWhite"} round={"md"} border={true} onClick={handleClick}>
         <Icon16 src={require("../../assets/icon/icon_home.png")} alt="아이콘" />
         <span>모달열기</span>
       </OneWayButton>
-      <TwoWayButton text={"labelMd"} color={"keyWhite"} round={"md"}>
-        <span onClick={onClick2}>선택가능</span>
-        <Icon16 src={require("../../assets/icon/icon_close.png")} alt="삭제" onClick={onClick3} />
-      </TwoWayButton>
     </>
   );
 };

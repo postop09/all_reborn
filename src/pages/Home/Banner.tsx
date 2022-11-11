@@ -20,13 +20,13 @@ const Banner = () => {
         className="mySwiper"
       >
         <SwiperSlide>
-          <SlideImg src="" alt="광고를 신청해주세요!" />
+          <SlideImg src="" alt="1번 슬라이드 😡" />
         </SwiperSlide>
         <SwiperSlide>
-          <SlideImg src="" alt="광고를 신청해주세요!" />
+          <SlideImg src="" alt="2번 슬라이드 🤢" />
         </SwiperSlide>
         <SwiperSlide>
-          <SlideImg src="" alt="광고를 신청해주세요!" />
+          <SlideImg src="" alt="3번 슬라이드 🥶" />
         </SwiperSlide>
       </Swiper>
     </section>

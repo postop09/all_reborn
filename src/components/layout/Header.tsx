@@ -72,6 +72,7 @@ export default Header;
 const HeaderWrapper = styled.header`
   position: fixed;
   top: 0;
+  box-shadow: 0px 5px 7px 2px #00000020;
   width: 100%;
   max-width: 428px;
   background: white;
