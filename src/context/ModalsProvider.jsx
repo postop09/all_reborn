@@ -1,12 +1,20 @@
 import React, { useMemo, useState } from "react";
-import { ModalsDispatchContext, ModalsStateContext } from "./ModalsContext";
+import { createContext } from "react";
+
+export const ModalsDispatchContext = createContext({
+  open: () => {},
+  close: () => {},
+});
+
+export const ModalsStateContext = createContext([]);
 
 const ModalsProvider = ({ children }) => {
+  console.log(children);
   const [openedModals, setOpenedModals] = useState([]);
 
   const open = (Component, props) => {
-    setOpenedModals((modals) => {
-      return [...modals, { Component, props }];
+    setOpenedModals((prev) => {
+      return [...prev, { Component, props }];
     });
   };
 
@@ -19,9 +27,9 @@ const ModalsProvider = ({ children }) => {
   const dispatch = useMemo(() => ({ open, close }), []);
 
   return (
-    <ModalsDispatchContext.Provider value={dispatch}>
-      <ModalsStateContext.Provider value={openedModals}>{children}</ModalsStateContext.Provider>
-    </ModalsDispatchContext.Provider>
+    <ModalsStateContext.Provider value={openedModals}>
+      <ModalsDispatchContext.Provider value={dispatch}>{children}</ModalsDispatchContext.Provider>
+    </ModalsStateContext.Provider>
   );
 };
 

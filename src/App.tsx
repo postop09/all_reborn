@@ -4,11 +4,8 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Layout from "./components/layout/Layout";
 import Search from "./pages/Search";
 import Error from "./pages/Error";
-import Modal from "react-modal";
 import Map from "./pages/Map";
 import Likes from "./pages/Likes";
-
-Modal.setAppElement("#root");
 
 function App() {
   return (

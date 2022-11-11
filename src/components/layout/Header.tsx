@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import { Icon16 } from "../../style/style";
+import { Icon16, Img40 } from "../../style/style";
 import { useNavigate } from "react-router-dom";
-import ILogo from "../../assets/image/img_logo.png";
+import ILogo from "../../assets/image/img_logo@x.png";
 import ITitle from "../../assets/image/img_title.png";
 import ISearch from "../../assets/icon/icon_search.png";
 import * as enums from "../../const/enums";
@@ -30,7 +30,7 @@ const Header = () => {
       <Ul>
         <li>
           <button type="button" onClick={() => navigate("/")}>
-            <img src={ILogo} alt="" />
+            <Img40 src={ILogo} alt="" />
           </button>
         </li>
         {pathName !== ROUTES.SEARCH ? (
