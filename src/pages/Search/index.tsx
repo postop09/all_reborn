@@ -1,6 +1,9 @@
 import React, {useEffect, useState} from 'react';
 import CardList from "../../components/CardList";
 import styled from "styled-components";
+import RecentList from "./RecentList";
+import RecommendList from "./RecommendList";
+import NewCompList from "./NewCompList";
 
 const Index = () => {
   const [list, setList] = useState([]);
@@ -17,15 +20,22 @@ const Index = () => {
   }
 
   return (
-    <>
-      <Title>검색</Title>
+    <Wrapper>
+      <HiddenTitle>검색</HiddenTitle>
+      <RecentList/>
+      <RecommendList/>
+      <NewCompList/>
       <CardList data={list}/>
-    </>
+    </Wrapper>
   );
 };
 
 export default Index;
 
-const Title = styled.h2`
-  ${({theme}) => theme.TEXT.headerMd};
+const Wrapper  = styled.section`
+  padding: 0 16px;
 `
+
+const HiddenTitle = styled.h2`
+  ${({ theme }) => theme.TEXT.hide};
+`;

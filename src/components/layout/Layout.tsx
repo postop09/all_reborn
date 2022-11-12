@@ -24,5 +24,5 @@ const Wrapper = styled.div`
 `;
 
 const MainWrapper = styled.main`
-  padding: 80px 0px 86px;
+  padding: 98px 0px 86px;
 `;
