@@ -32,7 +32,7 @@ const Index = () => {
   };
 
   const onClickContext = () => {
-    openModal(MyModal, { onClose: close });
+    openModal(MyModal, { onClose: () => {} });
   };
 
   return (

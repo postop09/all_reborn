@@ -17,14 +17,18 @@ const CompanyList = () => {
   };
 
   return (
-    <section>
+    <Wrapper>
       <Title>이 기업들을 살펴보세요</Title>
       <CardList data={list} />
-    </section>
+    </Wrapper>
   );
 };
 
 export default CompanyList;
+
+const Wrapper = styled.section`
+  margin-top: 20px;
+`
 
 const Title = styled.h3`
   margin-bottom: 12px;
