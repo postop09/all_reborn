@@ -19,7 +19,7 @@ const Modals = () => {
       onClose();
     };
 
-    return <Component key={index} onClose={onClose} handleSubmit={handleSubmit} {...restProps} />;
+    return <Component {...restProps} key={index} onClose={onClose} handleSubmit={handleSubmit} />;
   });
 };
 

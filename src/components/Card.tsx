@@ -32,9 +32,9 @@ const Card = (props: CardProps) => {
 
   return (
     <Li>
-      <ImgWrapper type="button" onClick={onDetail}>
+      <button type="button" onClick={onDetail}>
         <ImgCard src={img} alt="기업 상세조회" />
-      </ImgWrapper>
+      </button>
       <ContentWrapper>
         <TitleWrapper>
           <strong>{title}</strong>
@@ -62,17 +62,13 @@ const Li = styled.li`
   display: flex;
   border: 1px solid lightgray;
   border-radius: 4px;
-  width: 343px;
+  min-width: 280px;
 `;
 
 const TitleWrapper = styled.div`
   display: flex;
   align-items: center;
   column-gap: 5px;
-`;
-
-const ImgWrapper = styled.button`
-  padding: 0;
 `;
 
 const ContentWrapper = styled.div`
