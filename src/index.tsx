@@ -6,11 +6,13 @@ import theme from "./style/theme";
 import GlobalStyle from "./style/GlobalStyle";
 import { ThemeProvider } from "styled-components";
 import ModalsProvider from "./context/ModalsProvider";
+import Modal from "react-modal";
 
 if (process.env.NODE_ENV === "development") {
   const { worker } = require("./mocks/browser");
   worker.start();
 }
+Modal.setAppElement("#root");
 
 /**
  * createRoot 가 기대하는 type 과 getElementById 가 기대하는 type 이 일치하지 않는다.
@@ -21,8 +23,8 @@ const root = ReactDOM.createRoot(document.getElementById("root") as HTMLElement)
 root.render(
   <React.StrictMode>
     <ThemeProvider theme={theme}>
-      <GlobalStyle />
       <ModalsProvider>
+        <GlobalStyle />
         <App />
       </ModalsProvider>
     </ThemeProvider>

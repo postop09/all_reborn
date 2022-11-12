@@ -4,10 +4,8 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Layout from "./components/layout/Layout";
 import Search from "./pages/Search";
 import Error from "./pages/Error";
-import Modal from "react-modal";
 import Map from "./pages/Map";
-
-Modal.setAppElement("#root");
+import Likes from "./pages/Likes";
 
 function App() {
   return (
@@ -16,6 +14,7 @@ function App() {
         <Route element={<Layout />}>
           <Route path="/" element={<Home />} />
           <Route path="/map" element={<Map />} />
+          <Route path="/likes" element={<Likes />} />
           <Route path="/search" element={<Search />} />
           <Route path="/*" element={<Error />} />
         </Route>

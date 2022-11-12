@@ -12,3 +12,8 @@ export const ImgCard = styled.img`
   height: 109px;
   background: #d9d9d9;
 `;
+
+export const Img40 = styled.img`
+  width: 40px;
+  height: 40px;
+`;

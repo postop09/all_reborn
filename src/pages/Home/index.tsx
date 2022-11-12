@@ -1,16 +1,18 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import styled from "styled-components";
-import CardSimple from "../../components/CardSimple";
-import CardList from "../../components/CardList";
 import CompanyList from "./CompanyList";
 import LikesList from "./LikesList";
+import Banner from "./Banner";
 
 const Index = () => {
   return (
     <>
       <HiddenTitle>홈</HiddenTitle>
-      <LikesList />
-      <CompanyList />
+      <Banner />
+      <Wrapper>
+        <LikesList />
+        <CompanyList />
+      </Wrapper>
     </>
   );
 };
@@ -19,4 +21,9 @@ export default Index;
 
 const HiddenTitle = styled.h2`
   ${({ theme }) => theme.TEXT.hide};
+`;
+
+const Wrapper = styled.div`
+  margin-top: 20px;
+  padding: 0 16px;
 `;
