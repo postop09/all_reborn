@@ -3,4 +3,5 @@ export enum ROUTES {
   SEARCH = "/search",
   MAP = "/map",
   LIKES = "/likes",
+  LIST = "/list"
 }

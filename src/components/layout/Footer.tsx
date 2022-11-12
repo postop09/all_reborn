@@ -24,17 +24,17 @@ const Footer = () => {
       <nav>
         <Ul>
           <li>
-            <button type="button" onClick={() => navigate("/")}>
-              <ImgNav src={pathName === ROUTES.HOME ? IHome : IHomeE} alt="" />
+            <button type="button" onClick={() => navigate(ROUTES.LIST)}>
+              <ImgNav src={pathName === ROUTES.LIST ? IHome : IHomeE} alt="" />
             </button>
           </li>
           <li>
-            <button type="button" onClick={() => navigate("/map")}>
+            <button type="button" onClick={() => navigate(ROUTES.MAP)}>
               <ImgNav src={pathName === ROUTES.MAP ? IMap : IMapE} alt="" />
             </button>
           </li>
           <li>
-            <button type="button" onClick={() => navigate("/likes")}>
+            <button type="button" onClick={() => navigate(ROUTES.LIKES)}>
               <ImgNav src={pathName === ROUTES.LIKES ? ILikes : ILikesE} alt="" />
             </button>
           </li>
