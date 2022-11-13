@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 type Base = {
   text: string;
-  color: "keyWhite" | "keyOriginal";
+  color: "keyWhite" | "keyOriginal" | "white";
   round: string;
   border?: boolean;
   clickable?: boolean;
@@ -34,15 +34,28 @@ export const TwoWayButton = (props: TwoWayButton) => {
   const { children } = props;
 
   return (
-    <CustomButton {...props}>
+    <BtnWrapper {...props}>
       {children.map((child, index) => {
         return <React.Fragment key={index}>{child}</React.Fragment>;
       })}
-    </CustomButton>
+    </BtnWrapper>
   );
 };
 
 const CustomButton = styled.button<Base>`
+  display: flex;
+  column-gap: 4px;
+  align-items: center;
+  width: fit-content;
+  padding: 4px 12px;
+  ${({ text, theme }) => theme.TEXT[text]}
+  border: ${({ border }) => (border ? "2px solid #4AA96C" : "none")};
+  border-radius: ${({ round, theme }) => theme.ROUND[round]};
+  background-color: ${({ color, theme }) => theme.COLOR[color]};
+  cursor: ${({ clickable }) => (clickable ? "default" : "pointer")};
+`;
+
+const BtnWrapper = styled.span<Base>`
   display: flex;
   column-gap: 4px;
   align-items: center;

@@ -1,31 +1,33 @@
 import React, {useEffect, useState} from 'react';
 import CardList from "../../components/CardList";
 import styled from "styled-components";
+import RecentList from "./RecentList";
+import RecommendList from "./RecommendList";
+import NewCompList from "./NewCompList";
 
 const Index = () => {
-  const [list, setList] = useState([]);
-
-  useEffect(() => {
-    fetchList();
-  }, []);
-
-  const fetchList = async () => {
-    const res = await fetch("/list");
-    const json = await res.json();
-    const data = json.data;
-    setList(data);
-  }
-
   return (
-    <>
-      <Title>검색</Title>
-      <CardList data={list}/>
-    </>
+    <Wrapper>
+      <HiddenTitle>검색</HiddenTitle>
+      <RecentList/>
+        <SubWrapper>
+          <RecommendList/>
+          <NewCompList/>
+        </SubWrapper>
+    </Wrapper>
   );
 };
 
 export default Index;
 
-const Title = styled.h2`
-  ${({theme}) => theme.TEXT.headerMd};
+const Wrapper  = styled.section`
+  padding: 20px 16px 0;
+`
+
+const HiddenTitle = styled.h2`
+  ${({ theme }) => theme.TEXT.hide};
+`;
+
+const SubWrapper = styled.div`
+  text-align: center;
 `

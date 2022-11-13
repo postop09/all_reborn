@@ -68,6 +68,7 @@ const COLOR = {
   keyBlack: "#0F2216",
   secondWhite: "#D5D2D2",
   secondOriginal: "#564A4A",
+  white: "#FFFFFF"
 }
 
 const ROUND = {

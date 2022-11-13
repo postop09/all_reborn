@@ -3,7 +3,7 @@ import styled from "styled-components";
 import * as enums from "../../const/enums";
 import IHome from "../../assets/icon/icon_home.png";
 import IHomeE from "../../assets/icon/icon_home_empty.png";
-import IMap from "../../assets/icon/icon_mappin_white.png";
+import IMap from "../../assets/icon/icon_mappin.png";
 import IMapE from "../../assets/icon/icon_mappin_empty.png";
 import ILikes from "../../assets/icon/icon_heart_black.png";
 import ILikesE from "../../assets/icon/icon_heart_empty.png";

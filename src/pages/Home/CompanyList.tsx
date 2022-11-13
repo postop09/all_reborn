@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import CardList from "../../components/CardList";
 import styled from "styled-components";
+import {TitleH3} from "../../style/style";
 
 const CompanyList = () => {
   const [list, setList] = useState([]);
@@ -19,7 +20,7 @@ const CompanyList = () => {
   if (list.length === 0) {
     return (
         <Wrapper>
-          <Title>이 기업들을 살펴보세요</Title>
+          <TitleH3>이 기업들을 살펴보세요</TitleH3>
           <TxtWrapper>
             <span>등록된 기업이 없습니다.</span>
             <span>팀 올리본은 기업등록을 서둘러주세요!</span>
@@ -30,7 +31,7 @@ const CompanyList = () => {
 
   return (
     <Wrapper>
-      <Title>이 기업들을 살펴보세요</Title>
+      <TitleH3>이 기업들을 살펴보세요</TitleH3>
       <CardList data={list} />
     </Wrapper>
   );
@@ -51,8 +52,3 @@ const TxtWrapper = styled.p`
     display: block;
   }
 `
-
-const Title = styled.h3`
-  margin-bottom: 12px;
-  ${({ theme }) => theme.TEXT.headerMd}
-`;
