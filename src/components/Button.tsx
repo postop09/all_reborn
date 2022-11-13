@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 type Base = {
   text: string;
-  color: "keyWhite" | "keyOriginal";
+  color: "keyWhite" | "keyOriginal" | "white";
   round: string;
   border?: boolean;
   clickable?: boolean;

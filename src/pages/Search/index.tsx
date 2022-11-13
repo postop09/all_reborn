@@ -6,26 +6,14 @@ import RecommendList from "./RecommendList";
 import NewCompList from "./NewCompList";
 
 const Index = () => {
-  const [list, setList] = useState([]);
-
-  useEffect(() => {
-    fetchList();
-  }, []);
-
-  const fetchList = async () => {
-    const res = await fetch("/list");
-    const json = await res.json();
-    const data = json.data;
-    setList(data);
-  }
-
   return (
     <Wrapper>
       <HiddenTitle>검색</HiddenTitle>
       <RecentList/>
-      <RecommendList/>
-      <NewCompList/>
-      <CardList data={list}/>
+        <SubWrapper>
+          <RecommendList/>
+          <NewCompList/>
+        </SubWrapper>
     </Wrapper>
   );
 };
@@ -39,3 +27,7 @@ const Wrapper  = styled.section`
 const HiddenTitle = styled.h2`
   ${({ theme }) => theme.TEXT.hide};
 `;
+
+const SubWrapper = styled.div`
+  text-align: center;
+`
