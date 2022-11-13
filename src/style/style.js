@@ -19,6 +19,11 @@ export const Img40 = styled.img`
   height: 40px;
 `;
 
+export const Img24 = styled.img`
+  width: 24px;
+  height: 24px;
+`;
+
 
 // TEXT -----------------------------------------
 export const TitleH3 = styled.h3`

@@ -1,8 +1,8 @@
 import React, {useContext, useEffect, useState} from "react";
 import styled from "styled-components";
-import { Icon16, Img40 } from "../../style/style";
+import {Icon16, Img24, Img40} from "../../style/style";
 import { useNavigate } from "react-router-dom";
-import ILogo from "../../assets/image/img_logo@x.png";
+import ILogo from "../../assets/image/img_logo.png";
 import ITitle from "../../assets/image/img_title.png";
 import ISearch from "../../assets/icon/icon_search.png";
 import * as enums from "../../const/enums";
@@ -51,11 +51,11 @@ const Header = () => {
         {pathName !== ROUTES.SEARCH ? (
           <>
             <li>
-              <img src={ITitle} alt="" />
+              <ImgTitle src={ITitle} alt="올리본" />
             </li>
             <li>
               <button type="button" onClick={() => navigate("/search")}>
-                <img src={ISearch} alt="검색" />
+                <Img24 src={ISearch} alt="검색" />
               </button>
             </li>
           </>
@@ -97,6 +97,11 @@ const HeaderWrapper = styled.header`
 const HiddenTitle = styled.h1`
   ${({ theme }) => theme.TEXT.hide};
 `;
+
+const ImgTitle = styled.img`
+  width: 110px;
+  height: 30px;
+`
 
 const Ul = styled.ul`
   display: flex;
