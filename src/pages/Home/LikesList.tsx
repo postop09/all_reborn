@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import CardSimple from "../../components/CardSimple";
 import styled from "styled-components";
+import {TitleH3} from "../../style/style";
 
 const LikesList = () => {
   const [list, setList] = useState([]);
@@ -19,7 +20,7 @@ const LikesList = () => {
   if (list.length === 0) {
     return (
         <section>
-          <Title>내가 좋아하는 기업</Title>
+          <TitleH3>내가 좋아하는 기업</TitleH3>
           <TxtWrapper>
             <strong>😳 이런! 아직 좋아하는 기업이 없어요!</strong>
             <span>🔍 내가 좋아하는 기업을 찾아서</span>
@@ -32,7 +33,7 @@ const LikesList = () => {
 
   return (
     <section>
-      <Title>내가 좋아하는 기업</Title>
+      <TitleH3>내가 좋아하는 기업</TitleH3>
       <Ul>
         {list.map((item) => {
           const { id, img, name } = item;
@@ -44,11 +45,6 @@ const LikesList = () => {
 };
 
 export default LikesList;
-
-const Title = styled.h3`
-  margin-bottom: 12px;
-  ${({ theme }) => theme.TEXT.headerMd}
-`;
 
 const TxtWrapper = styled.p`
   ${({theme}) => theme.TEXT.bodyLg};

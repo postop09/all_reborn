@@ -1,0 +1,1 @@
+export const RECOMMEND_KEYWORDS = ["프라이탁", "업사이클링", "올리본", "재활용품", "플라스틱", "가방"];
