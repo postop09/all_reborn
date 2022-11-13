@@ -18,9 +18,9 @@ export const onChangeLikes = (id: number) => {
   }
   if (storage) {
     const arr = JSON.parse(storage);
-    const test = arr.filter((item: number) => item === id);
+    const filter = arr.filter((item: number) => item === id);
 
-    if (test.length > 0) {
+    if (filter.length > 0) {
       const filter = arr.filter((item: number) => item !== id);
       localStorage.setItem("likes", JSON.stringify(filter));
     } else {

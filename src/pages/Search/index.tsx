@@ -33,7 +33,7 @@ const Index = () => {
 export default Index;
 
 const Wrapper  = styled.section`
-  padding: 0 16px;
+  padding: 20px 16px 0;
 `
 
 const HiddenTitle = styled.h2`

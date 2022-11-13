@@ -5,8 +5,8 @@ import { worker } from "./mocks/browser";
 import theme from "./style/theme";
 import GlobalStyle from "./style/GlobalStyle";
 import { ThemeProvider } from "styled-components";
-import ModalsProvider from "./context/ModalsProvider";
 import Modal from "react-modal";
+import {AppProvider} from "./context/AppContext";
 
 if (process.env.NODE_ENV === "development") {
   const { worker } = require("./mocks/browser");
@@ -23,10 +23,10 @@ const root = ReactDOM.createRoot(document.getElementById("root") as HTMLElement)
 root.render(
   <React.StrictMode>
     <ThemeProvider theme={theme}>
-      <ModalsProvider>
+      <AppProvider>
         <GlobalStyle />
         <App />
-      </ModalsProvider>
+      </AppProvider>
     </ThemeProvider>
   </React.StrictMode>,
 );
