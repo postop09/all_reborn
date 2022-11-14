@@ -7,7 +7,7 @@ import styled from "styled-components";
 type DropDownProps = {
   list: string[];
   select: string;
-  setSelect: React.SetStateAction<any>; // type 생각해보자
+  setSelect: React.Dispatch<React.SetStateAction<string>>;
   defaultValue: string;
 };
 

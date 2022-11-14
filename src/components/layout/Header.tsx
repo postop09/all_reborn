@@ -11,7 +11,7 @@ import { AppContext } from "../../context/AppContext";
 const Header = () => {
   const navigate = useNavigate();
   const { ROUTES } = enums;
-  const { setRecentKeyword, setSearchList } = useContext(AppContext);
+  const { setRecentKeyword, setSearchList, setSearchCase } = useContext(AppContext);
   const [pathName, setPathName] = useState("");
   const [search, setSearch] = useState("");
 
@@ -27,6 +27,7 @@ const Header = () => {
     fetchSearchList(search);
   };
 
+  // TODO - 같은 이름이 있는 경우 삭제하고 push
   const pushRecentKeyword = () => {
     const storage = localStorage.getItem("recentKeyword");
 
@@ -38,16 +39,23 @@ const Header = () => {
     }
   };
 
-  // TODO - ContextAPI 를 이용해서 검색값, 검색 결과, 검색어를 컨트롤 해야할 듯
+  // TODO - ContextAPI 를 이용해서 검색값, 검색 결과, 검색어 컨트롤
   // TODO - 검색에 성공하면 pushRecentKeyword
   const fetchSearchList = async (path: string) => {
     try {
       const res = await fetch(`/${path}`);
       const json = await res.json();
       const data = json.data;
-      setSearchList(data);
+      if (data.length === 0) {
+        setSearchList([path]);
+        setSearchCase("noData");
+      } else {
+        setSearchList(data);
+        setSearchCase("hasData");
+      }
     } catch (e) {
-      setSearchList([]);
+      setSearchList([path]);
+      setSearchCase("noData");
     }
   };
 

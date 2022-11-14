@@ -20,6 +20,7 @@ const RecentList = () => {
     }
   };
 
+  // TODO - 최근목록 reverse or unShift
   if (recentKeyword.length > 0) {
     return (
       <Wrapper>
