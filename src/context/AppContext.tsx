@@ -1,39 +1,36 @@
-import React, {createContext, useEffect, useState} from "react";
+import React, { createContext, useEffect, useState } from "react";
 
 const AppContext = createContext({});
 
 interface contextProps {
-    children: React.ReactNode | React.ReactNode[];
+  children: React.ReactNode | React.ReactNode[];
 }
 
-const AppProvider = ({children}: contextProps) => {
-    const storage = localStorage.getItem("recentKeyword");
-    const [recentKeyword, setRecentKeyword] = useState<string[]>([]);
+const AppProvider = ({ children }: contextProps) => {
+  const keywordStorage = localStorage.getItem("recentKeyword");
+  const [recentKeyword, setRecentKeyword] = useState<string[]>([]);
+  const [searchList, setSearchList] = useState([]);
 
-    if (!storage) {
-        localStorage.setItem("recentKeyword", JSON.stringify([]));
+  if (!keywordStorage) {
+    localStorage.setItem("recentKeyword", JSON.stringify([]));
+  }
+
+  useEffect(() => {
+    if (keywordStorage) {
+      const arr = JSON.parse(keywordStorage);
+      setRecentKeyword(arr);
     }
+  }, []);
 
-    useEffect(() => {
-        if (storage) {
-            const arr = JSON.parse(storage);
-            setRecentKeyword(arr);
-        }
-    }, []);
+  // TODO - store type 설정 고민해봐야 함.
+  const store = {
+    recentKeyword,
+    setRecentKeyword,
+    searchList,
+    setSearchList,
+  };
 
-    // TODO - store type 설정 고민해봐야 함.
-    const store = {
-        recentKeyword, setRecentKeyword,
-    };
+  return <AppContext.Provider value={store}>{children}</AppContext.Provider>;
+};
 
-    return (
-        <AppContext.Provider value={store}>
-            {children}
-        </AppContext.Provider>
-    );
-}
-
-export {
-    AppProvider,
-    AppContext,
-}
+export { AppProvider, AppContext };

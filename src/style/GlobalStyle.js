@@ -70,6 +70,7 @@ const GlobalStyle = createGlobalStyle`
     padding: 0;
     background: none;
     cursor: pointer;
+    color: black;
   }
 
   img {
