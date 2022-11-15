@@ -6,6 +6,7 @@ import IYoutube from "../../assets/icon/icon_youtube.png";
 import IInstagram from "../../assets/icon/icon_insta.png";
 import ITiktok from "../../assets/icon/icon_tiktok.png";
 import IBlog from "../../assets/icon/icon_blog.png";
+import { useNavigate } from "react-router-dom";
 
 type SnsDirection = {
   src: string;
@@ -13,15 +14,46 @@ type SnsDirection = {
   path: string;
 };
 
+interface ImgList extends Array<SnsDirection> {}
+
+// 또는 다른 형태
+// interface ImgList {
+//   imgList : SnsDirection[];
+// }
+
 const DetailIntroduce = () => {
-  const imgList = [IBlog, IFacebook, IInstagram, IYoutube, ITiktok];
+  const navigate = useNavigate();
 
   // TODO - 객체 배열 형태로 만들어서 사용
-  // const imgObject: SnsDirection = [{
-  //   src: IBlog,
-  //   alt: "blog",
-  //   path: "https://naver.com",
-  // }];
+  //  path 는 서버에서 받아서 할당
+  //  받아온 리스트 중 등록되지 않은 sns 는 표시 X?
+  const imgList: ImgList = [
+    {
+      src: IBlog,
+      alt: "블로그",
+      path: "https://naver.com",
+    },
+    {
+      src: IFacebook,
+      alt: "페이스북",
+      path: "https://facebook.com",
+    },
+    {
+      src: IInstagram,
+      alt: "인스타그램",
+      path: "https://instagram.com",
+    },
+    {
+      src: IYoutube,
+      alt: "유튜브",
+      path: "https://youtube.com",
+    },
+    {
+      src: ITiktok,
+      alt: "틱톡",
+      path: "https://tiktok.com",
+    },
+  ];
 
   return (
     <DetailWrapper>
@@ -37,9 +69,9 @@ const DetailIntroduce = () => {
         {imgList.map((img, index) => {
           return (
             <li key={index}>
-              <button type="button">
-                <Img24 src={img} alt="SNS" />
-              </button>
+              <a href={img.path} target="_blank">
+                <Img24 src={img.src} alt={img.alt} />
+              </a>
             </li>
           );
         })}
