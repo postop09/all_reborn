@@ -25,6 +25,7 @@ const Header = () => {
     e.preventDefault();
     pushRecentKeyword();
     fetchSearchList(search);
+    setSearch("");
   };
 
   const pushRecentKeyword = () => {
