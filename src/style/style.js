@@ -24,9 +24,20 @@ export const Img24 = styled.img`
   height: 24px;
 `;
 
-
 // TEXT -----------------------------------------
 export const TitleH3 = styled.h3`
   margin-bottom: 12px;
-  ${({theme}) => theme.TEXT.headerMd};
-`
+  ${({ theme }) => theme.TEXT.headerMd};
+`;
+
+export const DetailTitleH3 = styled.h3`
+  margin-bottom: 12px;
+  ${({ theme }) => theme.TEXT.bodyLg};
+`;
+
+// Detail Component ----------------------------
+export const DetailWrapper = styled.section`
+  border-bottom: 1px solid ${({ theme }) => theme.COLOR.keyOriginal};
+  margin-bottom: 16px;
+  padding-bottom: 16px;
+`;
