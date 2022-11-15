@@ -33,9 +33,10 @@ const Header = () => {
 
     if (storage) {
       const arr = JSON.parse(storage);
-      arr.push(search);
-      localStorage.setItem("recentKeyword", JSON.stringify(arr));
-      setRecentKeyword(arr);
+      const filter = arr.filter((item: string) => item !== search);
+      filter.push(search);
+      localStorage.setItem("recentKeyword", JSON.stringify(filter));
+      setRecentKeyword(filter);
     }
   };
 

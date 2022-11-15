@@ -20,13 +20,15 @@ const RecentList = () => {
     }
   };
 
-  // TODO - 최근목록 reverse or unShift
+  // reverse 는 원본배열을 수정한다. copy 배열을 사용.
   if (recentKeyword.length > 0) {
+    const reverseList = [...recentKeyword].reverse();
+
     return (
       <Wrapper>
         <TitleH3>최근에 검색했어요</TitleH3>
         <Ul>
-          {recentKeyword.map((keyword: string, index: number) => {
+          {reverseList.map((keyword: string, index: number) => {
             return (
               <TwoWayButton color={"keyWhite"} round={"md"} text={"labelMd"} key={index}>
                 <button type="button">{keyword}</button>
