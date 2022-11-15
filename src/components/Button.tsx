@@ -53,6 +53,7 @@ const CustomButton = styled.button<Base>`
   border-radius: ${({ round, theme }) => theme.ROUND[round]};
   background-color: ${({ color, theme }) => theme.COLOR[color]};
   cursor: ${({ clickable }) => (clickable ? "default" : "pointer")};
+  white-space: nowrap;
 `;
 
 const BtnWrapper = styled.span<Base>`
@@ -66,4 +67,5 @@ const BtnWrapper = styled.span<Base>`
   border-radius: ${({ round, theme }) => theme.ROUND[round]};
   background-color: ${({ color, theme }) => theme.COLOR[color]};
   cursor: ${({ clickable }) => (clickable ? "default" : "pointer")};
+  white-space: nowrap;
 `;
