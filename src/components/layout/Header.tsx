@@ -27,7 +27,6 @@ const Header = () => {
     fetchSearchList(search);
   };
 
-  // TODO - 같은 이름이 있는 경우 삭제하고 push
   const pushRecentKeyword = () => {
     const storage = localStorage.getItem("recentKeyword");
 
