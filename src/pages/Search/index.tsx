@@ -13,7 +13,11 @@ const Index = () => {
   const [productSelect, setProductSelect] = useState("");
   const [recycleSelect, setRecycleSelect] = useState("");
   // TODO - 검색결과를 contextAPI 에서 가져와서 페이지를 렌더링 시킨다.
-  const { searchList, searchCase } = useContext(AppContext);
+  const { searchList, searchCase, setSearchCase } = useContext(AppContext);
+
+  useEffect(() => {
+    setSearchCase("default");
+  }, []);
 
   // 검색 결과가 있는 화면
   if (searchCase === "hasData") {
