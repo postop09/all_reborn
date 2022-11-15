@@ -7,6 +7,7 @@ import ITitle from "../../assets/image/img_title.png";
 import ISearch from "../../assets/icon/icon_search.png";
 import * as enums from "../../const/enums";
 import { AppContext } from "../../context/AppContext";
+import getQuery from "../../util/getQuery";
 
 const Header = () => {
   const navigate = useNavigate();
@@ -14,10 +15,12 @@ const Header = () => {
   const { setRecentKeyword, setSearchList, setSearchCase } = useContext(AppContext);
   const [pathName, setPathName] = useState("");
   const [search, setSearch] = useState("");
+  const [title, setTitle] = useState<string | null>("");
 
   useEffect(() => {
     const pathName = window.location.pathname;
     setPathName(pathName);
+    setTitle(getQuery());
   }, [window.location.pathname]);
 
   // 검색
@@ -71,9 +74,7 @@ const Header = () => {
         </li>
         {pathName !== ROUTES.SEARCH ? (
           <>
-            <li>
-              <ImgTitle src={ITitle} alt="올리본" />
-            </li>
+            <li>{title ? <TxtTitle>{title}</TxtTitle> : <ImgTitle src={ITitle} alt="올리본" />}</li>
             <li>
               <button type="button" onClick={() => navigate("/search")}>
                 <Img24 src={ISearch} alt="검색" />
@@ -122,6 +123,10 @@ const HiddenTitle = styled.h1`
 const ImgTitle = styled.img`
   width: 110px;
   height: 30px;
+`;
+
+const TxtTitle = styled.h2`
+  ${({ theme }) => theme.TEXT.headerLg}
 `;
 
 const Ul = styled.ul`

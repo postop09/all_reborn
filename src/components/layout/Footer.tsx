@@ -24,7 +24,7 @@ const Footer = () => {
       <nav>
         <Ul>
           <li>
-            <button type="button" onClick={() => navigate(ROUTES.LIST)}>
+            <button type="button" onClick={() => navigate(`${ROUTES.LIST}?title=기업목록`)}>
               <ImgNav src={pathName === ROUTES.LIST ? IHome : IHomeE} alt="" />
             </button>
           </li>
