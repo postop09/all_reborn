@@ -7,7 +7,7 @@ import GlobalStyle from "./style/GlobalStyle";
 import { ThemeProvider } from "styled-components";
 import Modal from "react-modal";
 import { AppProvider } from "./context/AppContext";
-import * as serviceWorker from "./serviceWorker";
+// import * as serviceWorker from "./serviceWorker";
 
 if (process.env.NODE_ENV === "development") {
   const { worker } = require("./mocks/browser");
@@ -32,4 +32,4 @@ root.render(
   </React.StrictMode>,
 );
 
-serviceWorker.register();
+// serviceWorker.register();

@@ -11,22 +11,22 @@
     {
       "src": "/icon/app_logo152.png",
       "type": "image/png",
-      "sizes": "141x152",
+      "sizes": "152x152",
       "purpose": "maskable"
     },
     {
       "src": "/icon/app_logo192.png",
       "type": "image/png",
-      "sizes": "178x192",
+      "sizes": "192x192",
       "purpose": "maskable"
     },
     {
       "src": "/icon/app_logo512.png",
       "type": "image/png",
-      "sizes": "475x512"
+      "sizes": "512x512"
     }
   ],
-  "start_url": "/",
+  "start_url": ".",
   "display": "standalone",
   "theme_color": "#000000",
   "background_color": "#ffffff"
