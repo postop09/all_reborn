@@ -39,9 +39,9 @@ const LikesList = () => {
     <section>
       <TitleH3>내가 좋아하는 기업</TitleH3>
       <Ul>
-        {list.map((item) => {
+        {list.map((item, index) => {
           const { id, img, name } = item;
-          return <CardSimple id={id} img={img} name={name} likable={true} />;
+          return <CardSimple id={id} img={img} name={name} likable={true} key={index} />;
         })}
       </Ul>
     </section>
