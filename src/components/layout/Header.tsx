@@ -12,7 +12,7 @@ import getQuery from "../../util/getQuery";
 const Header = () => {
   const navigate = useNavigate();
   const { ROUTES } = enums;
-  const { setRecentKeyword, setSearchList, setSearchCase } = useContext(AppContext);
+  const { setRecentKeyword, setSearchList, setSearchCase }: any = useContext(AppContext);
   const [pathName, setPathName] = useState("");
   const [search, setSearch] = useState("");
   const [title, setTitle] = useState<string | null>("");
