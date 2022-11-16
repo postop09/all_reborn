@@ -6,7 +6,7 @@ import { TwoWayButton } from "../../components/Button";
 import { AppContext } from "../../context/AppContext";
 
 const RecentList = () => {
-  const { recentKeyword, setRecentKeyword } = useContext(AppContext);
+  const { recentKeyword, setRecentKeyword }: any = useContext(AppContext);
 
   // TODO - ContextAPI - useContext 를 이용해서 전역 데이터를 가져와야 할듯 + store type 설정
   const popKeyword = (keyword: string) => {
