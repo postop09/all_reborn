@@ -16,10 +16,14 @@ const Index = () => {
   }, []);
 
   const fetchList = async () => {
-    const res = await fetch("/list");
-    const json = await res.json();
-    const data = json.data;
-    setList(data);
+    if (process.env.NODE_ENV === "development") {
+      const res = await fetch("/list");
+      const json = await res.json();
+      const data = json.data;
+      setList(data);
+    } else {
+      setList([]);
+    }
   };
 
   return (
