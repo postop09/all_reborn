@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import { Icon16, ImgCard } from "../style/style";
+import { Icon16, Img109 } from "../style/style";
 import ILike from "../assets/icon/icon_like.png";
 import ILikeE from "../assets/icon/icon_like_empty.png";
 import { onChangeLikes, onCheckLikes } from "../util/handleLikes";
@@ -52,7 +52,7 @@ const Wrapper = styled.div`
   position: relative;
 `;
 
-const Img = styled(ImgCard)`
+const Img = styled(Img109)`
   border-radius: ${({ theme }) => theme.ROUND.sm};
 `;
 

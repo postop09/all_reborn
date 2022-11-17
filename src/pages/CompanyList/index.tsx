@@ -71,5 +71,5 @@ const CateWrapper = styled.div`
 
 const TxtSearchCount = styled.p`
   margin-right: auto;
-  ${({ theme }) => theme.TEXT.labelMd};
+  ${({ theme }) => theme.TEXT.label12};
 `;

@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import styled from "styled-components";
 
 const Index = () => {
@@ -18,26 +18,27 @@ export default Index;
 
 const Wrapper = styled.section`
   text-align: center;
-`
+`;
 
 const HiddenTitle = styled.h2`
   ${({ theme }) => theme.TEXT.hide};
-`
+`;
 
 const TxtWrapper = styled.div`
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+
   p {
-    ${({theme}) => theme.TEXT.bodyMd};
+    ${({ theme }) => theme.TEXT.body14};
     font-weight: bold;
   }
-`
+`;
 
 const Strong = styled.strong`
   display: inline-block;
   margin-bottom: 20px;
-  ${({theme}) => theme.TEXT.headerLg};
+  ${({ theme }) => theme.TEXT.header20};
   font-weight: bold;
-`
+`;

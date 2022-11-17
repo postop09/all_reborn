@@ -12,7 +12,7 @@ const RecommendList = () => {
         {RECOMMEND_KEYWORDS.map((keyword, index) => {
           return (
             <li key={index}>
-              <OneWayButton text={"labelMd"} round={"md"} color={"white"} border={true}>
+              <OneWayButton text={"label12"} round={"md"} color={"white"} border={true}>
                 {keyword}
               </OneWayButton>
             </li>

@@ -1,50 +1,50 @@
 const TEXT = {
-  labelSm: `
+  label10: `
     font-size: 10px;
     line-height: 12px;
     letter-spacing: 1.5px;
   `,
-  labelMd: `
+  label12: `
     font-size: 12px;
     line-height: 16px;
     letter-spacing: 1.25px;
   `,
-  buttonSm: `
+  button10: `
     font-size: 10px;
     line-height: 12px;
     letter-spacing: 2px;
   `,
-  buttonMd: `
+  button12: `
     font-size: 12px;
     line-height: 16px;
     letter-spacing: 1.75px;
   `,
-  buttonLg: `
+  button14: `
     font-size: 14px;
     line-height: 16px;
     letter-spacing: 1.25px;
   `,
-  bodySm: `
+  body12: `
     font-size: 12px;
     line-height: 16px;
     letter-spacing: 0.75px;
   `,
-  bodyMd: `
+  body14: `
     font-size: 14px;
     line-height: 16px;
     letter-spacing: 0.25px;
   `,
-  bodyLg: `
+  body16: `
     font-size: 16px;
     line-height: 20px;
     letter-spacing: 0.5px;
   `,
-  headerMd: `
+  header18: `
     font-size: 18px;
     line-height: 24px;
     letter-spacing: 0.15px;
   `,
-  headerLg: `
+  header20: `
     font-size: 20px;
     line-height: 30px;
     letter-spacing: 0;
@@ -56,8 +56,8 @@ const TEXT = {
     height: 1px;
     margin: -1px;
     overflow: hidden;
-  `
-}
+  `,
+};
 
 const COLOR = {
   pointWhite: "#FEEFED",
@@ -68,8 +68,8 @@ const COLOR = {
   keyBlack: "#0F2216",
   secondWhite: "#D5D2D2",
   secondOriginal: "#564A4A",
-  white: "#FFFFFF"
-}
+  white: "#FFFFFF",
+};
 
 const ROUND = {
   xs: "4px",
@@ -77,12 +77,12 @@ const ROUND = {
   md: "16px",
   lg: "50%",
   xl: "100%",
-}
+};
 
 const theme = {
   TEXT,
   COLOR,
   ROUND,
-}
+};
 
 export default theme;
