@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import { Icon16, ImgCard } from "../style/style";
+import { Icon16, Img109 } from "../style/style";
 import { OneWayButton } from "./Button";
 import { CardProps } from "../util/type";
 import ILike from "../assets/icon/icon_like.png";
@@ -33,12 +33,12 @@ const Card = (props: CardProps) => {
   return (
     <Li>
       <button type="button" onClick={onDetail}>
-        <ImgCard src={img} alt="기업 상세조회" />
+        <Img109 src={img} alt="기업 상세조회" />
       </button>
       <ContentWrapper>
         <TitleWrapper>
           <strong>{title}</strong>
-          <OneWayButton text={"labelSm"} color={"keyWhite"} round={"md"} clickable={true}>
+          <OneWayButton text={"label10"} color={"keyWhite"} round={"md"} clickable={true}>
             {way}
           </OneWayButton>
         </TitleWrapper>
@@ -81,7 +81,7 @@ const ContentWrapper = styled.div`
 const RecycleList = styled.ul`
   display: flex;
   margin: 8px 0;
-  ${({ theme }) => theme.TEXT.bodyMd}
+  ${({ theme }) => theme.TEXT.body14}
 `;
 
 const RecycleItem = styled.li`
@@ -98,7 +98,7 @@ const RecycleItem = styled.li`
 `;
 
 const TxtContents = styled.p`
-  ${({ theme }) => theme.TEXT.bodyMd}
+  ${({ theme }) => theme.TEXT.body14}
   display: -webkit-box;
   text-overflow: ellipsis;
   overflow: hidden;

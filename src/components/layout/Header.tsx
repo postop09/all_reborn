@@ -126,7 +126,7 @@ const ImgTitle = styled.img`
 `;
 
 const TxtTitle = styled.h2`
-  ${({ theme }) => theme.TEXT.headerLg}
+  ${({ theme }) => theme.TEXT.header20}
 `;
 
 const Ul = styled.ul`
@@ -162,6 +162,6 @@ const LiSearch = styled.li`
     background: ${({ theme }) => theme.COLOR.keyWhite};
     width: 100%;
     padding: 10px 16px 10px calc(16px + 16px + 8px);
-    ${({ theme }) => theme.TEXT.labelMd}
+    ${({ theme }) => theme.TEXT.label12}
   }
 `;

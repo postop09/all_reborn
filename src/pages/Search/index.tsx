@@ -86,14 +86,14 @@ const CateWrapper = styled.div`
 
 const TxtSearchCount = styled.p`
   margin-right: auto;
-  ${({ theme }) => theme.TEXT.labelMd};
+  ${({ theme }) => theme.TEXT.label12};
 `;
 
 const TxtNoList = styled.p`
   margin-bottom: 20px;
   text-align: center;
   color: ${({ theme }) => theme.COLOR.pointOriginal};
-  ${({ theme }) => theme.TEXT.bodyMd};
+  ${({ theme }) => theme.TEXT.body14};
 
   img {
     display: block;
