@@ -13,7 +13,7 @@ const Index = () => {
 
   return (
     <>
-      <TwoWayButton text={"labelMd"} color={"keyWhite"} round={"md"}>
+      <TwoWayButton text={"label12"} color={"keyWhite"} round={"md"}>
         <span onClick={onClick2}>좋아요</span>
         <Icon16 src={require("../../assets/icon/icon_close.png")} alt="삭제" onClick={onClick3} />
       </TwoWayButton>

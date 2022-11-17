@@ -47,7 +47,7 @@ const LikesList = () => {
 export default LikesList;
 
 const TxtWrapper = styled.p`
-  ${({ theme }) => theme.TEXT.bodyLg};
+  ${({ theme }) => theme.TEXT.body16};
   text-align: center;
 
   strong {

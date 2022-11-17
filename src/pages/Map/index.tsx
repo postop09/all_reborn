@@ -32,12 +32,14 @@ const Index = () => {
   };
 
   const onClickContext = () => {
-    openModal(MyModal, { onClose: () => {} });
+    openModal(MyModal, {
+      onClose: () => {},
+    });
   };
 
   return (
     <>
-      <OneWayButton text={"labelMd"} color={"keyWhite"} round={"md"} border={true} onClick={onClickContext}>
+      <OneWayButton text={"label12"} color={"keyWhite"} round={"md"} border={true} onClick={onClickContext}>
         <Icon16 src={require("../../assets/icon/icon_home.png")} alt="아이콘" />
         <span>모달열기</span>
       </OneWayButton>

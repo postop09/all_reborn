@@ -30,7 +30,7 @@ const RecentList = () => {
         <Ul>
           {reverseList.map((keyword: string, index: number) => {
             return (
-              <TwoWayButton color={"keyWhite"} round={"md"} text={"labelMd"} key={index}>
+              <TwoWayButton color={"keyWhite"} round={"md"} text={"label12"} key={index}>
                 <button type="button">{keyword}</button>
                 <button type="button" onClick={() => popKeyword(keyword)}>
                   <Icon16 src={IClose} alt="최근 검색어 삭제" />
@@ -57,7 +57,7 @@ const Wrapper = styled.section`
 `;
 
 const P = styled.p`
-  ${({ theme }) => theme.TEXT.bodyLg};
+  ${({ theme }) => theme.TEXT.body16};
   text-align: center;
 `;
 

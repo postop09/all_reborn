@@ -23,7 +23,7 @@ const DropDown = (props: DropDownProps) => {
   return (
     <DropDownBox>
       <OneWayButton
-        text={"labelMd"}
+        text={"label12"}
         color={"white"}
         round={"md"}
         border={true}
@@ -68,7 +68,7 @@ const Ul = styled.ul<{ showOption: boolean }>`
   button {
     border-radius: ${({ theme }) => theme.ROUND.xs};
     width: 100%;
-    ${({ theme }) => theme.TEXT.labelMd};
+    ${({ theme }) => theme.TEXT.label12};
 
     &:hover {
       background-color: ${({ theme }) => theme.COLOR.keyWhite};

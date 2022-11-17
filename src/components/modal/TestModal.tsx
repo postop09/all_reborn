@@ -42,14 +42,14 @@ const HiddenTitle = styled.h3`
 const Wrapper = styled.div`
   padding: 36px 20px 24px;
   text-align: center;
-  ${({ theme }) => theme.TEXT.buttonMd}
+  ${({ theme }) => theme.TEXT.button12}
 `;
 
 const Button = styled.button`
   display: block;
   width: 100%;
   padding: 12px 0;
-  ${({ theme }) => theme.TEXT.buttonMd};
+  ${({ theme }) => theme.TEXT.button12};
   color: #ffffff;
   background: ${({ theme }) => theme.COLOR.keyOriginal};
 `;
