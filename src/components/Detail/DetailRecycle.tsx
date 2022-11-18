@@ -2,11 +2,14 @@ import React, { useState } from "react";
 import { DetailTitleH3, DetailWrapper } from "../../style/style";
 import styled from "styled-components";
 import { OneWayButton } from "../Button";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import RecycleList from "../RecycleList";
 
 const DetailRecycle = () => {
   const [tabIndex, setTabIndex] = useState(99);
   // TODO - 받아 온 재활용품 목록 정제
-  const recycleList = ["캔", "플라스틱", "유리"];
+  const recycleList = ["가죽", "플라스틱", "유리"];
 
   // 재활용품 수거방법 상세보기
   const onShowDetail = (index: number) => {
@@ -18,11 +21,20 @@ const DetailRecycle = () => {
   };
 
   // 클립보드 복사
-  // TODO - 복사완료 메시지 react-toast
   const onCopyAddress = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     const address = e.currentTarget.textContent;
     if (address) {
       navigator.clipboard.writeText(address);
+      toast.success("클립보드에 복사되었습니다.", {
+        position: "top-center",
+        autoClose: 2500,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+      });
     }
   };
 
@@ -31,22 +43,18 @@ const DetailRecycle = () => {
       <DetailTitleH3>재활용품 사용 정보</DetailTitleH3>
       <RecycleWrapper>
         <div>
-          <dt>사용 재활용품</dt>
+          <dt>사용 재활용품 :</dt>
           <dd>
-            <RecycleList>
-              {recycleList.map((item, index) => {
-                return <RecycleItem key={index}>{item}</RecycleItem>;
-              })}
-            </RecycleList>
+            <RecycleList recycleList={recycleList} />
           </dd>
         </div>
         <div>
-          <dt>재활용품 수거방법</dt>
+          <dt>재활용품 수거방법 :</dt>
           <dd>
-            <RecycleList>
+            <ProductList>
               {recycleList.map((item, index) => {
                 return (
-                  <RecycleItem key={index}>
+                  <ProductItem key={index}>
                     <OneWayButton
                       text={"label12"}
                       color={tabIndex === index ? "keyOriginal" : "keyWhite"}
@@ -55,10 +63,10 @@ const DetailRecycle = () => {
                     >
                       {item}
                     </OneWayButton>
-                  </RecycleItem>
+                  </ProductItem>
                 );
               })}
-            </RecycleList>
+            </ProductList>
           </dd>
         </div>
         <div>
@@ -74,11 +82,12 @@ const DetailRecycle = () => {
           )}
           {tabIndex === 2 && (
             <BtnCopyDetail type="button" title="클립보드에 복사" onClick={onCopyAddress}>
-              사랑시 고백구 행복동 강백호
+              사랑시 고백구 행복동 하하호호
             </BtnCopyDetail>
           )}
         </div>
       </RecycleWrapper>
+      <StyledToast />
     </DetailWrapper>
   );
 };
@@ -87,8 +96,13 @@ export default DetailRecycle;
 
 const RecycleWrapper = styled.dl`
   dt {
+    flex: 1;
     margin-right: 8px;
     ${({ theme }) => theme.TEXT.body14};
+  }
+
+  dd {
+    flex: 2;
   }
 
   div {
@@ -97,25 +111,15 @@ const RecycleWrapper = styled.dl`
   }
 `;
 
-const RecycleList = styled.ul`
+const ProductList = styled.ul`
   display: flex;
   margin: 8px 0;
   ${({ theme }) => theme.TEXT.body14}
 `;
 
-const RecycleItem = styled.li`
-  display: flex;
-  align-items: center;
-
-  &:not(li:last-child)::after {
-    content: "";
-    display: inline-block;
-    border-radius: 100%;
-    margin: 0 4px 2px;
-    width: 4px;
-    height: 4px;
-    vertical-align: middle;
-    background: #00000080;
+const ProductItem = styled.li`
+  &:not(li:last-child) {
+    margin-right: 4px;
   }
 `;
 
@@ -131,5 +135,11 @@ const BtnCopyDetail = styled.button`
 
   &:active {
     background-color: rgba(74, 169, 108, 0.5);
+  }
+`;
+
+const StyledToast = styled(ToastContainer)`
+  .Toastify__toast-theme--colored.Toastify__toast--success {
+    background-color: ${({ theme }) => theme.COLOR.keyOriginal};
   }
 `;

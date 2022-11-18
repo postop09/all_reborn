@@ -6,6 +6,7 @@ import { CardProps } from "../util/type";
 import ILike from "../assets/icon/icon_like.png";
 import ILikeE from "../assets/icon/icon_like_empty.png";
 import { onChangeLikes, onCheckLikes } from "../util/handleLikes";
+import RecycleList from "./RecycleList";
 
 const Card = (props: CardProps) => {
   const { title, way, contents, recycle, img, id } = props;
@@ -42,11 +43,7 @@ const Card = (props: CardProps) => {
             {way}
           </OneWayButton>
         </TitleWrapper>
-        <RecycleList>
-          {recycleList.map((item, index) => {
-            return <RecycleItem key={index}>{item}</RecycleItem>;
-          })}
-        </RecycleList>
+        <RecycleList recycleList={recycleList} />
         <TxtContents>{contents}</TxtContents>
       </ContentWrapper>
       <LikeBtn type="button" onClick={onLike}>
@@ -76,25 +73,6 @@ const ContentWrapper = styled.div`
   flex-direction: column;
   padding: 12.5px 4px 12.5px 8px;
   word-break: keep-all;
-`;
-
-const RecycleList = styled.ul`
-  display: flex;
-  margin: 8px 0;
-  ${({ theme }) => theme.TEXT.body14}
-`;
-
-const RecycleItem = styled.li`
-  &:not(li:last-child)::after {
-    content: "";
-    display: inline-block;
-    border-radius: 100%;
-    margin: 0 4px 2px;
-    width: 4px;
-    height: 4px;
-    vertical-align: middle;
-    background: #00000080;
-  }
 `;
 
 const TxtContents = styled.p`
