@@ -6,7 +6,7 @@ import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import RecycleList from "../RecycleList";
 
-const DetailRecycle = () => {
+const CompRecycle = () => {
   const [tabIndex, setTabIndex] = useState(99);
   // TODO - 받아 온 재활용품 목록 정제
   const recycleList = ["가죽", "플라스틱", "유리"];
@@ -43,13 +43,13 @@ const DetailRecycle = () => {
       <DetailTitleH3>재활용품 사용 정보</DetailTitleH3>
       <RecycleWrapper>
         <div>
-          <dt>사용 재활용품 :</dt>
+          <dt>사용 재활용품</dt>
           <dd>
             <RecycleList recycleList={recycleList} />
           </dd>
         </div>
         <div>
-          <dt>재활용품 수거방법 :</dt>
+          <dt>재활용품 수거방법</dt>
           <dd>
             <ProductList>
               {recycleList.map((item, index) => {
@@ -92,7 +92,7 @@ const DetailRecycle = () => {
   );
 };
 
-export default DetailRecycle;
+export default CompRecycle;
 
 const RecycleWrapper = styled.dl`
   dt {

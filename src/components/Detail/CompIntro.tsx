@@ -21,9 +21,7 @@ interface ImgList extends Array<SnsDirection> {}
 //   imgList : SnsDirection[];
 // }
 
-const DetailIntroduce = () => {
-  const navigate = useNavigate();
-
+const CompIntro = () => {
   // TODO - 객체 배열 형태로 만들어서 사용
   //  path 는 서버에서 받아서 할당
   //  받아온 리스트 중 등록되지 않은 sns 는 표시 X?
@@ -80,7 +78,7 @@ const DetailIntroduce = () => {
   );
 };
 
-export default DetailIntroduce;
+export default CompIntro;
 
 const HiddenTxt = styled.span`
   ${({ theme }) => theme.TEXT.hide};

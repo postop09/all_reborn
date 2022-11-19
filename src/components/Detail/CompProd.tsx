@@ -4,7 +4,7 @@ import CardSimple from "../CardSimple";
 import { simpleList } from "../../mockData";
 import styled from "styled-components";
 
-const DetailProduct = () => {
+const CompProd = () => {
   // TODO 상위 컴포넌트에서 데이터를 받아와서 출력
   //  + type 체크
 
@@ -34,7 +34,7 @@ const DetailProduct = () => {
   );
 };
 
-export default DetailProduct;
+export default CompProd;
 
 const Ul = styled.ul`
   display: flex;

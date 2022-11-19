@@ -4,6 +4,7 @@ import { Icon16, Img109 } from "../style/style";
 import ILike from "../assets/icon/icon_like.png";
 import ILikeE from "../assets/icon/icon_like_empty.png";
 import { onChangeLikes, onCheckLikes } from "../util/handleLikes";
+import {useNavigate} from "react-router-dom";
 
 type CardSimpleProps = {
   id: number;
@@ -13,6 +14,8 @@ type CardSimpleProps = {
 };
 
 const CardSimple = (props: CardSimpleProps) => {
+  // TODO - 구분자값으로 기업/제품 분리
+  const navigate = useNavigate();
   const { id, img, name, likable } = props;
   const [like, setLike] = useState(false);
 
@@ -29,10 +32,15 @@ const CardSimple = (props: CardSimpleProps) => {
     setLike((prev) => !prev);
   };
 
+  // TODO - props 로 구분자값 내려주기
+  const onDetail = () => {
+    navigate("/detail");
+  }
+
   return (
     <Li>
       <Wrapper>
-        <button type="button">
+        <button type="button" onClick={() => onDetail()}>
           <Img src={img} alt="기업 상세조회" />
         </button>
         {likable && (
@@ -56,13 +64,16 @@ const Wrapper = styled.div`
   position: relative;
 `;
 
-// TODO - @media screen 380px 이하는 이미지 크기 조절
 const Img = styled(Img109)`
   border-radius: ${({ theme }) => theme.ROUND.sm};
 
   @media screen and (max-width: 380px) {
     width: 100px;
     height: 100px;
+  }
+  @media screen and (min-width: 415px) {
+    width: 120px;
+    height: 120px;
   }
 `;
 
