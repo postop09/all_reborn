@@ -30,7 +30,7 @@ const CardSimple = (props: CardSimpleProps) => {
   };
 
   return (
-    <li>
+    <Li>
       <Wrapper>
         <button type="button">
           <Img src={img} alt="기업 상세조회" />
@@ -42,18 +42,28 @@ const CardSimple = (props: CardSimpleProps) => {
         )}
       </Wrapper>
       <CompanyName>{name}</CompanyName>
-    </li>
+    </Li>
   );
 };
 
 export default CardSimple;
 
+const Li = styled.li`
+  display: inline-block;
+`;
+
 const Wrapper = styled.div`
   position: relative;
 `;
 
+// TODO - @media screen 380px 이하는 이미지 크기 조절
 const Img = styled(Img109)`
   border-radius: ${({ theme }) => theme.ROUND.sm};
+
+  @media screen and (max-width: 380px) {
+    width: 100px;
+    height: 100px;
+  }
 `;
 
 const LikeBtn = styled.button`
