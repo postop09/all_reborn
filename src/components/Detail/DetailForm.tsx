@@ -46,6 +46,7 @@ const Wrapper = styled.div`
 `;
 
 const Img = styled.img`
+  width: 100%;
   min-height: 210px;
   background-color: #dddddd;
 `;
