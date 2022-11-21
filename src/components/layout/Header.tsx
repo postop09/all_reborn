@@ -22,7 +22,6 @@ const Header = () => {
     const pathName = window.location.pathname;
     setPathName(pathName);
     setTitle(getQuery());
-    console.log(getQuery());
   }, [getQuery(), window.location.pathname]);
 
   // 검색
