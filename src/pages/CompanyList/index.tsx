@@ -4,6 +4,7 @@ import DropDown from "../../components/DropDown";
 import { PRODUCT_LIST, RECYCLE_LIST } from "../../const/const";
 import CardList from "../../components/CardList";
 import TxtNoCompList from "../../components/TxtNoCompList";
+import * as mockData from "../../mockData";
 
 const Index = () => {
   const [productSelect, setProductSelect] = useState("");
@@ -22,7 +23,9 @@ const Index = () => {
       const data = json.data;
       setList(data);
     } else {
-      setList([]);
+      // 임시
+      const mockList: any = mockData.list;
+      setList(mockList);
     }
   };
 

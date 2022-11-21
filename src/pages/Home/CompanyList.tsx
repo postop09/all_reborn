@@ -3,6 +3,7 @@ import CardList from "../../components/CardList";
 import styled from "styled-components";
 import { TitleH3 } from "../../style/style";
 import TxtNoCompList from "../../components/TxtNoCompList";
+import * as mockData from "../../mockData";
 
 const CompanyList = () => {
   const [list, setList] = useState([]);
@@ -19,7 +20,9 @@ const CompanyList = () => {
       const data = json.data;
       setList(data);
     } else {
-      setList([]);
+      // 임시
+      const mockList: any = mockData.list;
+      setList(mockList);
     }
   };
 

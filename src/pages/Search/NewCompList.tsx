@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { TitleH3 } from "../../style/style";
 import CardList from "../../components/CardList";
 import TxtNoCompList from "../../components/TxtNoCompList";
+import * as mockData from "../../mockData";
 
 const NewCompList = () => {
   const [list, setList] = useState([]);
@@ -17,7 +18,8 @@ const NewCompList = () => {
       const data = json.data;
       setList(data);
     } else {
-      setList([]);
+      const mockList: any = mockData.list;
+      setList(mockList);
     }
   };
 

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import CardSimple from "../../components/CardSimple";
 import styled from "styled-components";
 import { TitleH3 } from "../../style/style";
+import * as mockData from "../../mockData";
 
 const LikesList = () => {
   const [list, setList] = useState([]);
@@ -17,7 +18,9 @@ const LikesList = () => {
       const data = json.data;
       setList(data);
     } else {
-      setList([]);
+      // 임시
+      const mockList: any = mockData.simpleList;
+      setList(mockList);
     }
   };
 
