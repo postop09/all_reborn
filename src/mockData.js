@@ -134,3 +134,55 @@ export const simpleList = [
     name: "이름10",
   },
 ];
+export const prodList = [
+  {
+    id: 500,
+    img: "icon_home1.png",
+    name: "상품1",
+  },
+  {
+    id: 501,
+    img: "icon_home2.png",
+    name: "상품2",
+  },
+  {
+    id: 502,
+    img: "icon_home3.png",
+    name: "상품3",
+  },
+  {
+    id: 503,
+    img: "icon_home4.png",
+    name: "상품4",
+  },
+  {
+    id: 504,
+    img: "icon_home5.png",
+    name: "상품5",
+  },
+  {
+    id: 505,
+    img: "icon_home6.png",
+    name: "상품6",
+  },
+  {
+    id: 506,
+    img: "icon_home7.png",
+    name: "상품7",
+  },
+  {
+    id: 507,
+    img: "icon_home8.png",
+    name: "상품8",
+  },
+  {
+    id: 508,
+    img: "icon_home9.png",
+    name: "상품9",
+  },
+  {
+    id: 509,
+    img: "icon_home10.png",
+    name: "상품10",
+  },
+];

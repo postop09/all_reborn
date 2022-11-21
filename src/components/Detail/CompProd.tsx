@@ -1,11 +1,11 @@
 import React from "react";
 import { DetailTitleH3, DetailWrapper } from "../../style/style";
 import CardSimple from "../CardSimple";
-import { simpleList } from "../../mockData";
+import { prodList } from "../../mockData";
 import styled from "styled-components";
 
 const CompProd = () => {
-  if (simpleList.length === 0) {
+  if (prodList.length === 0) {
     return (
       <DetailWrapper>
         <DetailTitleH3>업사이클링 제품 정보</DetailTitleH3>
@@ -18,7 +18,7 @@ const CompProd = () => {
     <DetailWrapper>
       <DetailTitleH3>업사이클링 제품 정보</DetailTitleH3>
       <Ul>
-        {simpleList.map((product) => {
+        {prodList.map((product) => {
           const { id, name, img } = product;
           return (
             <React.Fragment key={id}>
