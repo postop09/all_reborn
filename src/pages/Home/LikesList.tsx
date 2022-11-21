@@ -41,7 +41,7 @@ const LikesList = () => {
       <Ul>
         {list.map((item, index) => {
           const { id, img, name } = item;
-          return <CardSimple id={id} img={img} name={name} likable={true} key={index} />;
+          return <CardSimple key={index} id={id} img={img} name={name} likable={true} />;
         })}
       </Ul>
     </section>

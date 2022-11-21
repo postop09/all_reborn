@@ -1,12 +1,6 @@
 import React from "react";
-import { DetailTitleH3, DetailWrapper, Img24 } from "../../style/style";
+import { DetailTitleH3, DetailWrapper } from "../../style/style";
 import styled from "styled-components";
-import IFacebook from "../../assets/icon/icon_facebook.png";
-import IYoutube from "../../assets/icon/icon_youtube.png";
-import IInstagram from "../../assets/icon/icon_insta.png";
-import ITiktok from "../../assets/icon/icon_tiktok.png";
-import IBlog from "../../assets/icon/icon_blog.png";
-import { useNavigate } from "react-router-dom";
 
 const CompIntro = () => {
   return (
@@ -15,9 +9,8 @@ const CompIntro = () => {
         제품명<HiddenTxt> 소개</HiddenTxt>
       </DetailTitleH3>
       <Contents>
-        불어라 불어라 겨울바람아. 너는 배은망덕한 사람만큼이나 무정하구나. 인생이란 누구나 한 번쯤 시도해 볼 만한
-        것이다. 아무리 중대한 실수를 저질렀더라도 항상 또다른 기회는 있기 마련이다. 우리가 실패라 부르는 것은 추락하는
-        것이 아니라 추락한 채로 있는 것이다.
+        비밀은 셋 중 둘이 죽었을 때에만 지킬 수 있다. 성공은 열심히 노력하며 기다리는 사람에게 찾아온다. 인간의 감정은
+        누군가를 만날 때와 헤어질 때 가장 순수하며 가장 빛난다.
       </Contents>
     </DetailWrapper>
   );

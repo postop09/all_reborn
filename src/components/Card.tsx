@@ -25,7 +25,7 @@ const Card = (props: CardProps) => {
   // 상세조회
   const onDetail = () => {
     // TODO - 선택한 항목의 id 값으로 API 호출이 성공하면 이동
-    navigate("/detail");
+    navigate(`/detail?title=${title}`);
   };
 
   // 좋아요
