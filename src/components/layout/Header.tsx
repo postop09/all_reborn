@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import ILogo from "../../assets/image/img_logo.png";
 import ITitle from "../../assets/image/img_title.png";
 import ISearch from "../../assets/icon/icon_search.png";
+import IReturn from "../../assets/icon/icon_return.png";
 import * as enums from "../../const/enums";
 import { AppContext } from "../../context/AppContext";
 import getQuery from "../../util/getQuery";
@@ -44,7 +45,7 @@ const Header = () => {
   };
 
   // TODO - ContextAPI 를 이용해서 검색값, 검색 결과, 검색어 컨트롤
-  // TODO - 검색에 성공하면 pushRecentKeyword
+  //  검색에 성공하면 pushRecentKeyword
   const fetchSearchList = async (path: string) => {
     try {
       const res = await fetch(`/${path}`);
@@ -68,9 +69,15 @@ const Header = () => {
       <HiddenTitle>새활용은 올리본</HiddenTitle>
       <Ul>
         <li>
-          <button type="button" onClick={() => navigate("/")}>
-            <Img40 src={ILogo} alt="" />
-          </button>
+          {pathName !== ROUTES.DETAIL ? (
+            <button type="button" onClick={() => navigate("/")}>
+              <Img40 src={ILogo} alt="올리본 홈으로 이동" />
+            </button>
+          ) : (
+            <button type="button" onClick={() => navigate(-1)}>
+              <Img40 src={IReturn} alt="뒤로가기" />
+            </button>
+          )}
         </li>
         {pathName !== ROUTES.SEARCH ? (
           <>
