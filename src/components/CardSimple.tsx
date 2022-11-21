@@ -4,16 +4,19 @@ import { Icon16, Img109 } from "../style/style";
 import ILike from "../assets/icon/icon_like.png";
 import ILikeE from "../assets/icon/icon_like_empty.png";
 import { onChangeLikes, onCheckLikes } from "../util/handleLikes";
+import { useNavigate } from "react-router-dom";
 
 type CardSimpleProps = {
   id: number;
   img: string;
   name: string;
   likable?: boolean;
+  type?: "company" | "product";
 };
 
 const CardSimple = (props: CardSimpleProps) => {
-  const { id, img, name, likable } = props;
+  const navigate = useNavigate();
+  const { id, img, name, likable, type } = props;
   const [like, setLike] = useState(false);
 
   useEffect(() => {
@@ -29,10 +32,18 @@ const CardSimple = (props: CardSimpleProps) => {
     setLike((prev) => !prev);
   };
 
+  const onDetail = () => {
+    // TODO - 선택한 항목의 id 값으로 API 호출이 성공하면 이동
+
+    navigate(`/detail?title=${name}`, {
+      state: type,
+    });
+  };
+
   return (
-    <li>
+    <Li>
       <Wrapper>
-        <button type="button">
+        <button type="button" onClick={() => onDetail()}>
           <Img src={img} alt="기업 상세조회" />
         </button>
         {likable && (
@@ -42,11 +53,15 @@ const CardSimple = (props: CardSimpleProps) => {
         )}
       </Wrapper>
       <CompanyName>{name}</CompanyName>
-    </li>
+    </Li>
   );
 };
 
 export default CardSimple;
+
+const Li = styled.li`
+  display: inline-block;
+`;
 
 const Wrapper = styled.div`
   position: relative;
@@ -54,6 +69,15 @@ const Wrapper = styled.div`
 
 const Img = styled(Img109)`
   border-radius: ${({ theme }) => theme.ROUND.sm};
+
+  @media screen and (max-width: 380px) {
+    width: 100px;
+    height: 100px;
+  }
+  @media screen and (min-width: 415px) {
+    width: 120px;
+    height: 120px;
+  }
 `;
 
 const LikeBtn = styled.button`
