@@ -2,4 +2,4 @@
 
 ## 테스트 페이지
 
-https://postop09.github.io/all_reborn
+https://dev-allreborn.netlify.app
