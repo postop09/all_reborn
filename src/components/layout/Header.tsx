@@ -23,7 +23,7 @@ const Header = () => {
     setPathName(pathName);
     setTitle(getQuery());
     console.log(getQuery());
-  }, [getQuery()]);
+  }, [getQuery(), window.location.pathname]);
 
   // 검색
   const onSearch = (e: React.FormEvent) => {
