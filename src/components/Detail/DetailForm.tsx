@@ -7,31 +7,30 @@ import CompInfo from "./CompInfo";
 import ProdIntro from "./ProdIntro";
 import ProdRecycle from "./ProdRecycle";
 import ProdOthers from "./ProdOthers";
+import { useLocation } from "react-router-dom";
 
 const DetailForm = () => {
-  // TODO - 부모 컴포넌트에서 데이터를 요청하고 들어온다.
-  //  받아온 데이터를 각 컴포넌트에 넘겨준다.
-  //  구분자 값으로 제품 or 기업 다른 ui 를 보여준다.
-  let standard = "company";
+  const location = useLocation();
+  const type = location.state;
 
   return (
     <section>
       <Img src={""} alt="기업 이미지" />
       <HiddenTitle>상세조회</HiddenTitle>
-      {standard === "company" ?
+      {type !== "product" ? (
         <Wrapper>
           <CompIntro />
           <CompRecycle />
           <CompProd />
           <CompInfo />
         </Wrapper>
-        :
+      ) : (
         <Wrapper>
           <ProdIntro />
           <ProdRecycle />
           <ProdOthers />
         </Wrapper>
-      }
+      )}
     </section>
   );
 };

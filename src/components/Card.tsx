@@ -7,10 +7,12 @@ import ILike from "../assets/icon/icon_like.png";
 import ILikeE from "../assets/icon/icon_like_empty.png";
 import { onChangeLikes, onCheckLikes } from "../util/handleLikes";
 import RecycleList from "./RecycleList";
+import { useNavigate } from "react-router-dom";
 
 const Card = (props: CardProps) => {
   const { title, way, contents, recycle, img, id } = props;
   const recycleList = recycle.slice(0, 3);
+  const navigate = useNavigate();
   const [like, setLike] = useState(false);
 
   useEffect(() => {
@@ -22,7 +24,8 @@ const Card = (props: CardProps) => {
 
   // 상세조회
   const onDetail = () => {
-    console.log("Move Detail!");
+    // TODO - 선택한 항목의 id 값으로 API 호출이 성공하면 이동
+    navigate("/detail");
   };
 
   // 좋아요

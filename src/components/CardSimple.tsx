@@ -4,19 +4,19 @@ import { Icon16, Img109 } from "../style/style";
 import ILike from "../assets/icon/icon_like.png";
 import ILikeE from "../assets/icon/icon_like_empty.png";
 import { onChangeLikes, onCheckLikes } from "../util/handleLikes";
-import {useNavigate} from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 type CardSimpleProps = {
   id: number;
   img: string;
   name: string;
   likable?: boolean;
+  type?: "company" | "product";
 };
 
 const CardSimple = (props: CardSimpleProps) => {
-  // TODO - 구분자값으로 기업/제품 분리
   const navigate = useNavigate();
-  const { id, img, name, likable } = props;
+  const { id, img, name, likable, type } = props;
   const [like, setLike] = useState(false);
 
   useEffect(() => {
@@ -32,10 +32,12 @@ const CardSimple = (props: CardSimpleProps) => {
     setLike((prev) => !prev);
   };
 
-  // TODO - props 로 구분자값 내려주기
   const onDetail = () => {
-    navigate("/detail");
-  }
+    // TODO - 선택한 항목의 id 값으로 API 호출이 성공하면 이동
+    navigate("/detail", {
+      state: type,
+    });
+  };
 
   return (
     <Li>

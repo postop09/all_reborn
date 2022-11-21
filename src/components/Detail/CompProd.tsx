@@ -5,9 +5,6 @@ import { simpleList } from "../../mockData";
 import styled from "styled-components";
 
 const CompProd = () => {
-  // TODO 상위 컴포넌트에서 데이터를 받아와서 출력
-  //  + type 체크
-
   if (simpleList.length === 0) {
     return (
       <DetailWrapper>
@@ -25,7 +22,7 @@ const CompProd = () => {
           const { id, name, img } = product;
           return (
             <React.Fragment key={id}>
-              <CardSimple id={id} img={img} name={name} />
+              <CardSimple id={id} img={img} name={name} type={"product"} />
             </React.Fragment>
           );
         })}
