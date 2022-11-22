@@ -10,7 +10,7 @@ import RecycleList from "./RecycleList";
 import { useNavigate } from "react-router-dom";
 
 const Card = (props: CardProps) => {
-  const { title, way, contents, recycle, img, id } = props;
+  const { title, way, contents, recycle, img, id, reload } = props;
   const recycleList = recycle.slice(0, 3);
   const navigate = useNavigate();
   const [like, setLike] = useState(false);
@@ -32,6 +32,9 @@ const Card = (props: CardProps) => {
   const onLike = () => {
     onChangeLikes(id);
     setLike((prev) => !prev);
+    if (reload) {
+      window.location.reload();
+    }
   };
 
   return (

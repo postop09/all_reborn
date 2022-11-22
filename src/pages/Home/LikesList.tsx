@@ -3,25 +3,34 @@ import CardSimple from "../../components/CardSimple";
 import styled from "styled-components";
 import { TitleH3 } from "../../style/style";
 import * as mockData from "../../mockData";
+import { onGetLikes } from "../../util/handleLikes";
+import { CardProps } from "../../util/type";
+
+interface List extends Array<CardProps> {}
 
 const LikesList = () => {
-  const [list, setList] = useState([]);
+  const [list, setList] = useState<List>([]);
 
   useEffect(() => {
-    fetchList();
+    onFilterLikes();
   }, []);
 
-  const fetchList = async () => {
-    if (process.env.NODE_ENV === "development") {
-      const res = await fetch("/simplelist");
-      const json = await res.json();
-      const data = json.data;
-      setList(data);
-    } else {
-      // 임시
-      const mockList: any = mockData.simpleList;
-      setList(mockList);
+  // 전체기업 중 좋아요 기업 출력
+  const onFilterLikes = () => {
+    const storage = onGetLikes();
+    const data = mockData.list;
+    let newData: List = [];
+
+    if (storage) {
+      storage.map((likeId) => {
+        const findItem = data.find((item) => item.id === likeId);
+        if (findItem) {
+          newData.push(findItem);
+        }
+      });
+      setList(newData);
     }
+    return;
   };
 
   if (list.length === 0) {
@@ -43,8 +52,8 @@ const LikesList = () => {
       <TitleH3>내가 좋아하는 기업</TitleH3>
       <Ul>
         {list.map((item, index) => {
-          const { id, img, name } = item;
-          return <CardSimple key={index} id={id} img={img} name={name} likable={true} />;
+          const { id, img, title } = item;
+          return <CardSimple key={index} id={id} img={img} name={title} likable={true} />;
         })}
       </Ul>
     </section>

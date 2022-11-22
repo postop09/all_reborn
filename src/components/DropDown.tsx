@@ -64,6 +64,7 @@ const Ul = styled.ul<{ showOption: boolean }>`
   text-align: center;
   background-color: #ffffff;
   border-radius: ${({ theme }) => theme.ROUND.sm};
+  z-index: 10;
 
   button {
     border-radius: ${({ theme }) => theme.ROUND.xs};

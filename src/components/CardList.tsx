@@ -5,16 +5,17 @@ import styled from "styled-components";
 
 type List<T> = {
   data: T[];
+  reload?: boolean;
 };
 
 const CardList = (props: List<CardProps>) => {
-  const { data } = props;
+  const { data, reload } = props;
 
   return (
     <Ul>
       {data &&
         data.map((item) => {
-          return <Card {...item} key={item.id} />;
+          return <Card {...item} key={item.id} reload={reload} />;
         })}
     </Ul>
   );

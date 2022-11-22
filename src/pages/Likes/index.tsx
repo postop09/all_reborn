@@ -1,34 +1,40 @@
 import React, { useEffect, useState } from "react";
 import DropDown from "../../components/DropDown";
 import { PRODUCT_LIST, RECYCLE_LIST } from "../../const/const";
-import CardList from "../../components/CardList";
 import styled from "styled-components";
 import INoLikes from "../../assets/image/img_noLikes.png";
 import * as mockData from "../../mockData";
 import { onGetLikes } from "../../util/handleLikes";
+import { CardProps } from "../../util/type";
+import CardSimple from "../../components/CardSimple";
+
+interface List extends Array<CardProps> {}
 
 const Index = () => {
   const [productSelect, setProductSelect] = useState("");
   const [recycleSelect, setRecycleSelect] = useState("");
-  const [list, setList] = useState([]);
-  const ARR = [1, 3, 5, 7, 1000];
+  const [list, setList] = useState<List>([]);
 
   useEffect(() => {
-    onShowLikeList();
+    onFilterLikes();
   }, []);
 
-  const onShowLikeList = () => {
+  // 전체기업 중 좋아요 기업 출력
+  const onFilterLikes = () => {
     const storage = onGetLikes();
-    console.log(storage);
     const data = mockData.list;
-    let newData: any = [];
-    ARR.map((like) => {
-      const res = data.find((item) => item.id === like);
-      if (res) {
-        newData.push(res);
-      }
-    });
-    console.log(newData);
+    let newData: List = [];
+
+    if (storage) {
+      storage.map((likeId) => {
+        const findItem = data.find((item) => item.id === likeId);
+        if (findItem) {
+          newData.push(findItem);
+        }
+      });
+      setList(newData);
+    }
+    return;
   };
 
   return (
@@ -54,7 +60,11 @@ const Index = () => {
         )}
       </CateWrapper>
       {list.length > 0 ? (
-        <CardList data={list} />
+        <Ul>
+          {list.map((item) => {
+            return <CardSimple key={item.id} id={item.id} img={item.img} name={item.title} likable={true} />;
+          })}
+        </Ul>
       ) : (
         <TxtWrapper>
           <img src={INoLikes} alt="" />
@@ -86,6 +96,13 @@ const CateWrapper = styled.div`
 const TxtSearchCount = styled.p`
   margin-right: auto;
   ${({ theme }) => theme.TEXT.label12};
+`;
+
+const Ul = styled.ul`
+  display: flex;
+  flex-wrap: wrap;
+  row-gap: 12px;
+  justify-content: space-between;
 `;
 
 const TxtWrapper = styled.p`

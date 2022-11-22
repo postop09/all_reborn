@@ -5,4 +5,5 @@ export type CardProps = {
   way: string;
   recycle: string[];
   contents: string;
+  reload?: boolean;
 };
