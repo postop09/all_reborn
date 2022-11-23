@@ -38,7 +38,7 @@ const CompanyList = () => {
   return (
     <Wrapper>
       <TitleH3>이 기업들을 살펴보세요</TitleH3>
-      <CardList data={list} />
+      <CardList data={list} reload={true} />
     </Wrapper>
   );
 };
