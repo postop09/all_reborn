@@ -7,6 +7,11 @@ import MyModal from "../../components/modal/MyModal";
 import useModals from "../../hook/useModal";
 import styled from "styled-components";
 
+type Location = {
+  latitude: number;
+  longitude: number;
+};
+
 const Index = () => {
   // MODAL
   // const [modal, setModal] = useState(false);
@@ -51,12 +56,16 @@ const Index = () => {
 
   // NAVER MAP
   const mapEl = useRef<any>();
-  const [myLocation, setMyLocation] = useState<any>();
+  const [myLocation, setMyLocation] = useState<Location>({
+    latitude: 37.2755704,
+    longitude: 127.042399,
+  });
 
   // 내 위치 찾기
   useEffect(() => {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition((position) => {
+        console.log(position);
         setMyLocation({
           latitude: position.coords.latitude,
           longitude: position.coords.longitude,
@@ -67,33 +76,18 @@ const Index = () => {
     }
   }, []);
 
-  // 지도 그리기
+  // 현재위치 기준 지도 그리기
   useEffect(() => {
-    if (process.env.NODE_ENV !== "development") {
-      if (typeof myLocation !== "string") {
-        const location = new naver.maps.LatLng(myLocation.latitude, myLocation.longitude);
-        const mapOptions = {
-          center: location,
-          zoom: 14,
-        };
-        const map = new naver.maps.Map(mapEl.current, mapOptions);
-        new naver.maps.Marker({
-          position: location,
-          map,
-        });
-      }
-    } else {
-      const location = new naver.maps.LatLng(37.2755704, 127.042399);
-      const mapOptions = {
-        center: location,
-        zoom: 14,
-      };
-      const map = new naver.maps.Map(mapEl.current, mapOptions);
-      new naver.maps.Marker({
-        position: location,
-        map,
-      });
-    }
+    const location = new naver.maps.LatLng(myLocation.latitude, myLocation.longitude);
+    const mapOptions = {
+      center: location,
+      zoom: 14,
+    };
+    const map = new naver.maps.Map(mapEl.current, mapOptions);
+    new naver.maps.Marker({
+      position: location,
+      map,
+    });
   }, [myLocation]);
 
   return (
@@ -106,5 +100,5 @@ const Index = () => {
 export default Index;
 
 const MapWrapper = styled.div`
-  height: 400px;
+  height: 500px;
 `;
