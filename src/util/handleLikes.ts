@@ -1,11 +1,19 @@
 // 로컬스토리지의 좋아요 목록을 확인
-export const onCheckLikes = (id: number): void | boolean => {
+export const onGetLikes = (): number[] | void => {
   const storage = localStorage.getItem("likes");
-
   if (storage) {
     const arr = JSON.parse(storage);
-    const test = arr.filter((item: number) => item === id);
-    return test.length > 0;
+    return arr;
+  }
+  return;
+};
+
+export const onCheckLikes = (id: number): boolean | void => {
+  const storage = onGetLikes();
+
+  if (storage) {
+    const filter = storage.filter((item: number) => item === id);
+    return filter.length > 0;
   }
 };
 

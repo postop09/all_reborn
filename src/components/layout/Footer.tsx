@@ -34,7 +34,7 @@ const Footer = () => {
             </button>
           </li>
           <li>
-            <button type="button" onClick={() => navigate(ROUTES.LIKES)}>
+            <button type="button" onClick={() => navigate(`${ROUTES.LIKES}?title=좋아요`)}>
               <ImgNav src={pathName === ROUTES.LIKES ? ILikes : ILikesE} alt="" />
             </button>
           </li>
