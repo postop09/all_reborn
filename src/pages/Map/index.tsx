@@ -7,8 +7,6 @@ import MyModal from "../../components/modal/MyModal";
 import useModals from "../../hook/useModal";
 import styled from "styled-components";
 
-const { naver } = window;
-
 const Index = () => {
   // MODAL
   // const [modal, setModal] = useState(false);
@@ -69,15 +67,7 @@ const Index = () => {
     }
   }, []);
 
-  // useEffect(() => {
-  //   const location = new naver.maps.LatLng(37.5656, 126.9769);
-  //   new naver.maps.Marker({
-  //     position: location,
-  //     map,
-  //   });
-  // }, []);
-
-  // 내 위치 기준
+  // 지도 그리기
   useEffect(() => {
     if (process.env.NODE_ENV !== "development") {
       if (typeof myLocation !== "string") {
@@ -108,7 +98,7 @@ const Index = () => {
 
   return (
     <MapWrapper>
-      <div ref={mapEl} style={{ minHeight: "400px" }}></div>
+      <div ref={mapEl} style={{ height: "100%" }}></div>
     </MapWrapper>
   );
 };
@@ -116,5 +106,5 @@ const Index = () => {
 export default Index;
 
 const MapWrapper = styled.div`
-  height: 100%;
+  height: 400px;
 `;
