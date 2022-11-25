@@ -66,6 +66,7 @@ const Li = styled.li`
   border: 1px solid lightgray;
   border-radius: 4px;
   min-width: 280px;
+  background-color: white;
 `;
 
 const TitleWrapper = styled.div`

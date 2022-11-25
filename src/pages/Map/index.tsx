@@ -6,6 +6,7 @@ import { ModalsDispatchContext } from "../../context/ModalsProvider";
 import MyModal from "../../components/modal/MyModal";
 import useModals from "../../hook/useModal";
 import styled from "styled-components";
+import Card from "../../components/Card";
 
 type Location = {
   latitude: number;
@@ -60,6 +61,7 @@ const Index = () => {
     latitude: 37.2755704,
     longitude: 127.042399,
   });
+  const [component, setComponent] = useState(false);
 
   // 내 위치 찾기
   useEffect(() => {
@@ -84,15 +86,44 @@ const Index = () => {
       zoom: 14,
     };
     const map = new naver.maps.Map(mapEl.current, mapOptions);
-    new naver.maps.Marker({
+    const marker = new naver.maps.Marker({
       position: location,
       map,
+    });
+
+    const infoWindow = new naver.maps.InfoWindow({
+      content: ['<div class="iw_inner">', "  <p>hello world!</p>", "  <p>안녕하세요 설명입니다.</p>", "</div>"].join(
+        "",
+      ),
+    });
+
+    // 클릭 이벤트
+    naver.maps.Event.addListener(marker, "click", function (e) {
+      if (infoWindow.getMap()) {
+        infoWindow.close();
+        setComponent(false);
+      } else {
+        infoWindow.open(map, marker);
+        setComponent(true);
+      }
     });
   }, [myLocation]);
 
   return (
     <MapWrapper>
       <div ref={mapEl} style={{ height: "100%" }}></div>
+      {component && (
+        <DetailCardWrapper>
+          <Card
+            id={1234}
+            title={"지도기업"}
+            img={""}
+            way={"차량"}
+            recycle={["캔", "유리", "비닐"]}
+            contents={"기업소개글입니다."}
+          />
+        </DetailCardWrapper>
+      )}
     </MapWrapper>
   );
 };
@@ -100,5 +131,19 @@ const Index = () => {
 export default Index;
 
 const MapWrapper = styled.div`
+  position: relative;
   height: 500px;
+`;
+
+const DetailCardWrapper = styled.div`
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 10px;
+  z-index: 100;
+
+  > li {
+    box-shadow: 3px 4px 4px #0f221626;
+  }
 `;
