@@ -66,7 +66,58 @@ const Index = () => {
     longitude: 127.042399,
   });
   const [component, setComponent] = useState(false);
-  const [showMyGPS, setShowMyGPS] = useState(false);
+  const TEST = [
+    {
+      id: 1,
+      latitude: 37.1755704,
+      longitude: 127.042399,
+    },
+    {
+      id: 2,
+      latitude: 37.9755704,
+      longitude: 127.042399,
+    },
+    {
+      id: 3,
+      latitude: 38.1755704,
+      longitude: 127.042399,
+    },
+    {
+      id: 4,
+      latitude: 39.1755704,
+      longitude: 127.042399,
+    },
+    {
+      id: 5,
+      latitude: 36.1755704,
+      longitude: 127.042399,
+    },
+    {
+      id: 6,
+      latitude: 35.1755704,
+      longitude: 127.042399,
+    },
+    {
+      id: 7,
+      latitude: 35.1755704,
+      longitude: 126.042399,
+    },
+    {
+      id: 8,
+      latitude: 35.1755704,
+      longitude: 124.042399,
+    },
+    {
+      id: 9,
+      latitude: 35.1755704,
+      longitude: 127.942399,
+    },
+    {
+      id: 10,
+      latitude: 35.1755704,
+      longitude: 129.042399,
+    },
+  ];
 
   // 0. 내 위치를 찾는다.
   useEffect(() => {
@@ -89,8 +140,9 @@ const Index = () => {
       icon: IMyLocation,
     });
 
-    // 1-2. 내 위치로 이동하는 커스텀 버튼을 생성한다.
+    // 1-2. 커스텀 버튼을 생성한다.
     naver.maps.Event.once(map, "init", () => {
+      // 내 위치로 이동
       const myGPS = new naver.maps.CustomControl(
         `
             <button type="button" class="btn_gps"><img src="${IGPS}" alt='내위치' class="icon_gps"/></button>
@@ -99,8 +151,23 @@ const Index = () => {
           position: naver.maps.Position.TOP_RIGHT,
         },
       );
+
+      // 내 위치에서 검색
+      const storeNearByGPS = new naver.maps.CustomControl(
+        `
+            <button type="button" class="btn_gps btn_here">여기서 찾기</button>
+          `,
+        {
+          position: naver.maps.Position.TOP_RIGHT,
+        },
+      );
+
+      storeNearByGPS.setMap(map);
       myGPS.setMap(map);
 
+      naver.maps.Event.addDOMListener(storeNearByGPS.getElement(), "click", () => {
+        console.log("주변 store 보여주기");
+      });
       naver.maps.Event.addDOMListener(myGPS.getElement(), "click", () => {
         map.setCenter(location);
       });
@@ -122,32 +189,23 @@ const Index = () => {
     }
   };
 
-  // 현재위치 기준 지도 그리기
-  // useEffect(() => {
-  //   const location = new naver.maps.LatLng(myLocation.latitude, myLocation.longitude);
-  //   const mapOptions = {
-  //     center: location,
-  //     zoom: 14,
-  //   };
-  //   const map = new naver.maps.Map(mapEl.current, mapOptions);
-  //
-  //   // 내 위치 marker
-  //   const marker = new naver.maps.Marker({
-  //     position: location,
-  //     map,
-  //     icon: IMyLocation,
-  //   });
-  //
-  //   // 클릭 이벤트
-  //   naver.maps.Event.addListener(marker, "click", (e) => {
-  //     setComponent((prev) => !prev);
-  //   });
-  //
-  //   // 상세정보
-  //   const infoWindow = new naver.maps.InfoWindow({
-  //     content: ['<div class="iw_inner">', "<p>hello world!</p>", "<p>안녕하세요 설명입니다.</p>", "</div>"].join(""),
-  //   });
-  // }, [myLocation]);
+  const getStoreList = (map: any) => {
+    const markers = TEST.map((item) => {
+      const location = new naver.maps.LatLng(item.latitude, item.longitude);
+      const marker = new naver.maps.Marker({
+        position: location,
+        map,
+        icon: IMappin,
+      });
+      return marker;
+    });
+    console.log(markers);
+  };
+
+  // Marker 클릭 이벤트
+  // naver.maps.Event.addListener(marker, "click", (e) => {
+  //   setComponent((prev) => !prev);
+  // });
 
   return (
     <MapWrapper>
