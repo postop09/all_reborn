@@ -7,6 +7,10 @@ import MyModal from "../../components/modal/MyModal";
 import useModals from "../../hook/useModal";
 import styled from "styled-components";
 import Card from "../../components/Card";
+import IMappin from "../../assets/icon/icon_mappin_green.png";
+import IGPS from "../../assets/icon/icon_crosshair.png";
+import IMyLocation from "../../assets/icon/icon_myGPS.png";
+import "../../style/naverMap.css";
 
 type Location = {
   latitude: number;
@@ -62,9 +66,49 @@ const Index = () => {
     longitude: 127.042399,
   });
   const [component, setComponent] = useState(false);
+  const [showMyGPS, setShowMyGPS] = useState(false);
 
-  // 내 위치 찾기
+  // 0. 내 위치를 찾는다.
   useEffect(() => {
+    getMyLocation();
+  }, []);
+
+  // 1. 내 위치를 기준으로 지도를 연다.
+  useEffect(() => {
+    const location = new naver.maps.LatLng(myLocation.latitude, myLocation.longitude);
+    const mapOptions = {
+      center: location,
+      zoom: 14,
+    };
+    const map = new naver.maps.Map(mapEl.current, mapOptions);
+
+    // 1-1. 내 위치를 기본적으로 표시한다.
+    const marker = new naver.maps.Marker({
+      position: location,
+      map,
+      icon: IMyLocation,
+    });
+
+    // 1-2. 내 위치로 이동하는 커스텀 버튼을 생성한다.
+    naver.maps.Event.once(map, "init", () => {
+      const myGPS = new naver.maps.CustomControl(
+        `
+            <button type="button" class="btn_gps"><img src="${IGPS}" alt='내위치' class="icon_gps"/></button>
+          `,
+        {
+          position: naver.maps.Position.TOP_RIGHT,
+        },
+      );
+      myGPS.setMap(map);
+
+      naver.maps.Event.addDOMListener(myGPS.getElement(), "click", () => {
+        map.setCenter(location);
+      });
+    });
+  }, [myLocation]);
+
+  // 0-1. 내 위치 찾기
+  const getMyLocation = () => {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition((position) => {
         console.log(position);
@@ -76,38 +120,34 @@ const Index = () => {
     } else {
       window.alert("현재위치를 알수 없습니다.");
     }
-  }, []);
+  };
 
   // 현재위치 기준 지도 그리기
-  useEffect(() => {
-    const location = new naver.maps.LatLng(myLocation.latitude, myLocation.longitude);
-    const mapOptions = {
-      center: location,
-      zoom: 14,
-    };
-    const map = new naver.maps.Map(mapEl.current, mapOptions);
-    const marker = new naver.maps.Marker({
-      position: location,
-      map,
-    });
-
-    const infoWindow = new naver.maps.InfoWindow({
-      content: ['<div class="iw_inner">', "  <p>hello world!</p>", "  <p>안녕하세요 설명입니다.</p>", "</div>"].join(
-        "",
-      ),
-    });
-
-    // 클릭 이벤트
-    naver.maps.Event.addListener(marker, "click", function (e) {
-      if (infoWindow.getMap()) {
-        infoWindow.close();
-        setComponent(false);
-      } else {
-        infoWindow.open(map, marker);
-        setComponent(true);
-      }
-    });
-  }, [myLocation]);
+  // useEffect(() => {
+  //   const location = new naver.maps.LatLng(myLocation.latitude, myLocation.longitude);
+  //   const mapOptions = {
+  //     center: location,
+  //     zoom: 14,
+  //   };
+  //   const map = new naver.maps.Map(mapEl.current, mapOptions);
+  //
+  //   // 내 위치 marker
+  //   const marker = new naver.maps.Marker({
+  //     position: location,
+  //     map,
+  //     icon: IMyLocation,
+  //   });
+  //
+  //   // 클릭 이벤트
+  //   naver.maps.Event.addListener(marker, "click", (e) => {
+  //     setComponent((prev) => !prev);
+  //   });
+  //
+  //   // 상세정보
+  //   const infoWindow = new naver.maps.InfoWindow({
+  //     content: ['<div class="iw_inner">', "<p>hello world!</p>", "<p>안녕하세요 설명입니다.</p>", "</div>"].join(""),
+  //   });
+  // }, [myLocation]);
 
   return (
     <MapWrapper>
@@ -147,3 +187,9 @@ const DetailCardWrapper = styled.div`
     box-shadow: 3px 4px 4px #0f221626;
   }
 `;
+
+const style = {
+  width: "24px",
+  height: "24px",
+  backgroundColor: "${({ theme }) => theme.COLOR.keyWhite}",
+};
