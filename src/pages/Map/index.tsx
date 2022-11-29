@@ -74,48 +74,48 @@ const Index = () => {
     },
     {
       id: 2,
-      latitude: 37.9755704,
-      longitude: 127.042399,
+      latitude: 37.1955704,
+      longitude: 127.242399,
     },
     {
       id: 3,
-      latitude: 38.1755704,
-      longitude: 127.042399,
+      latitude: 37.2555704,
+      longitude: 127.142399,
     },
     {
       id: 4,
-      latitude: 39.1755704,
+      latitude: 37.3755704,
       longitude: 127.042399,
     },
     {
       id: 5,
-      latitude: 36.1755704,
-      longitude: 127.042399,
+      latitude: 37.3955704,
+      longitude: 127.142399,
     },
     {
       id: 6,
-      latitude: 35.1755704,
+      latitude: 37.3955704,
       longitude: 127.042399,
     },
     {
       id: 7,
-      latitude: 35.1755704,
-      longitude: 126.042399,
+      latitude: 37.3955704,
+      longitude: 127.092399,
     },
     {
       id: 8,
-      latitude: 35.1755704,
-      longitude: 124.042399,
+      latitude: 37.3955704,
+      longitude: 127.242399,
     },
     {
       id: 9,
-      latitude: 35.1755704,
+      latitude: 37.3955704,
       longitude: 127.942399,
     },
     {
       id: 10,
-      latitude: 35.1755704,
-      longitude: 129.042399,
+      latitude: 37.3955704,
+      longitude: 127.542399,
     },
   ];
 
@@ -124,12 +124,30 @@ const Index = () => {
     getMyLocation();
   }, []);
 
+  useEffect(() => {
+    const location = new naver.maps.LatLng(myLocation.latitude, myLocation.longitude);
+    const mapOptions = {
+      center: location,
+      zoom: 14,
+      minZoom: 8,
+    };
+    const map = new naver.maps.Map(mapEl.current, mapOptions);
+
+    // 1-1. 내 위치를 기본적으로 표시한다.
+    const marker = new naver.maps.Marker({
+      position: location,
+      map,
+      icon: IMyLocation,
+    });
+  }, []);
+
   // 1. 내 위치를 기준으로 지도를 연다.
   useEffect(() => {
     const location = new naver.maps.LatLng(myLocation.latitude, myLocation.longitude);
     const mapOptions = {
       center: location,
       zoom: 14,
+      minZoom: 8,
     };
     const map = new naver.maps.Map(mapEl.current, mapOptions);
 
@@ -141,6 +159,7 @@ const Index = () => {
     });
 
     // 1-2. 커스텀 버튼을 생성한다.
+    // TODO - 리랜더링 시 재생성 되는 문제(그림자가 점점 짙어짐. 1번만 생성되도록 조치)
     naver.maps.Event.once(map, "init", () => {
       // 내 위치로 이동
       const myGPS = new naver.maps.CustomControl(
@@ -166,7 +185,8 @@ const Index = () => {
       myGPS.setMap(map);
 
       naver.maps.Event.addDOMListener(storeNearByGPS.getElement(), "click", () => {
-        console.log("주변 store 보여주기");
+        // getStoreList(map);
+        getList(map);
       });
       naver.maps.Event.addDOMListener(myGPS.getElement(), "click", () => {
         map.setCenter(location);
@@ -189,7 +209,31 @@ const Index = () => {
     }
   };
 
+  // 여러개의 마커 생성 (현재위치 기준 map 을 새로 랜더링)
   const getStoreList = (map: any) => {
+    TEST.map((item) => {
+      const location = new naver.maps.LatLng(item.latitude, item.longitude);
+      const marker = new naver.maps.Marker({
+        position: location,
+        map,
+        icon: IMappin,
+      });
+
+      // TODO - mappin 재생성 방지
+      // const bounds = map.getBounds();
+      // if (bounds.hasPoint(location)) {
+      //   naver.maps.Event.addListener(marker, "click", (e) => {
+      //     // setComponent((prev) => !prev);
+      //     console.log("marker event!!", item.id);
+      //   });
+      //   marker.setMap(map);
+      // } else {
+      //   marker.setMap(null);
+      // }
+    });
+  };
+
+  const getList = (map: any) => {
     const markers = TEST.map((item) => {
       const location = new naver.maps.LatLng(item.latitude, item.longitude);
       const marker = new naver.maps.Marker({
@@ -200,16 +244,39 @@ const Index = () => {
       return marker;
     });
     console.log(markers);
+    return markers;
   };
 
-  // Marker 클릭 이벤트
-  // naver.maps.Event.addListener(marker, "click", (e) => {
-  //   setComponent((prev) => !prev);
-  // });
+  const showMarkers = (map: any, markers: any) => {
+    const bounds = map.getBounds();
+    markers.map((marker: any) => {
+      const position = marker.getPosition();
+      if (bounds.hasPoint(position)) {
+        naver.maps.Event.addListener(marker, "click", (e) => {
+          // setComponent((prev) => !prev);
+          console.log("marker event!!", marker.id);
+        });
+        show(map, marker);
+      } else {
+        hide(map, marker);
+      }
+    });
+  };
+
+  const show = (map: any, marker: any) => {
+    console.log(marker.getMap());
+    if (marker.getMap()) return;
+    marker.setMap(map);
+  };
+
+  const hide = (map: any, marker: any) => {
+    if (!marker.getMap()) return;
+    marker.setMap(null);
+  };
 
   return (
     <MapWrapper>
-      <div ref={mapEl} style={{ height: "100%" }}></div>
+      <div id="map" ref={mapEl} style={{ height: "100%" }}></div>
       {component && (
         <DetailCardWrapper>
           <Card
@@ -230,7 +297,7 @@ export default Index;
 
 const MapWrapper = styled.div`
   position: relative;
-  height: 500px;
+  height: calc(100vh - 170px);
 `;
 
 const DetailCardWrapper = styled.div`
@@ -245,9 +312,3 @@ const DetailCardWrapper = styled.div`
     box-shadow: 3px 4px 4px #0f221626;
   }
 `;
-
-const style = {
-  width: "24px",
-  height: "24px",
-  backgroundColor: "${({ theme }) => theme.COLOR.keyWhite}",
-};
