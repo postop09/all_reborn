@@ -11,6 +11,7 @@ import IMappin from "../../assets/icon/icon_mappin_green.png";
 import IGPS from "../../assets/icon/icon_crosshair.png";
 import IMyLocation from "../../assets/icon/icon_myGPS.png";
 import "../../style/naverMap.css";
+import { MAP_LIST } from "../../mockData";
 
 type Location = {
   latitude: number;
@@ -65,59 +66,7 @@ const Index = () => {
     latitude: 37.2755704,
     longitude: 127.042399,
   });
-  const [component, setComponent] = useState(false);
-  const TEST = [
-    {
-      id: 1,
-      latitude: 37.1755704,
-      longitude: 127.042399,
-    },
-    {
-      id: 2,
-      latitude: 37.1955704,
-      longitude: 127.242399,
-    },
-    {
-      id: 3,
-      latitude: 37.2555704,
-      longitude: 127.142399,
-    },
-    {
-      id: 4,
-      latitude: 37.3755704,
-      longitude: 127.042399,
-    },
-    {
-      id: 5,
-      latitude: 37.3955704,
-      longitude: 127.142399,
-    },
-    {
-      id: 6,
-      latitude: 37.3955704,
-      longitude: 127.042399,
-    },
-    {
-      id: 7,
-      latitude: 37.3955704,
-      longitude: 127.092399,
-    },
-    {
-      id: 8,
-      latitude: 37.3955704,
-      longitude: 127.242399,
-    },
-    {
-      id: 9,
-      latitude: 37.3955704,
-      longitude: 127.942399,
-    },
-    {
-      id: 10,
-      latitude: 37.3955704,
-      longitude: 127.542399,
-    },
-  ];
+  const [component, setComponent] = useState<any[]>([]);
 
   // 0. 내 위치를 찾는다.
   useEffect(() => {
@@ -170,27 +119,25 @@ const Index = () => {
           position: naver.maps.Position.TOP_RIGHT,
         },
       );
-
-      // 내 위치에서 검색
-      const storeNearByGPS = new naver.maps.CustomControl(
-        `
-            <button type="button" class="btn_gps btn_here">여기서 찾기</button>
-          `,
-        {
-          position: naver.maps.Position.TOP_RIGHT,
-        },
-      );
-
-      storeNearByGPS.setMap(map);
       myGPS.setMap(map);
-
-      naver.maps.Event.addDOMListener(storeNearByGPS.getElement(), "click", () => {
-        // getStoreList(map);
-        getList(map);
-      });
       naver.maps.Event.addDOMListener(myGPS.getElement(), "click", () => {
         map.setCenter(location);
       });
+
+      // 2. 현재 지도에서 마커 표시
+      showMarkersHere(map);
+
+      // 내 위치에서 검색
+      // const storeNearByGPS = new naver.maps.CustomControl(
+      //   `
+      //       <button type="button" class="btn_gps btn_here">여기서 찾기</button>
+      //     `,
+      //   {
+      //     position: naver.maps.Position.TOP_RIGHT,
+      //   },
+      // );
+      //
+      // storeNearByGPS.setMap(map);
     });
   }, [myLocation]);
 
@@ -209,86 +156,57 @@ const Index = () => {
     }
   };
 
-  // 여러개의 마커 생성 (현재위치 기준 map 을 새로 랜더링)
-  const getStoreList = (map: any) => {
-    TEST.map((item) => {
+  // 2-3. 지도 idle 이벤트 적용
+  const showMarkersHere = (map: naver.maps.Map) => {
+    const markers = getMarkerList(map);
+    naver.maps.Event.addListener(map, "idle", function () {
+      showMarkers(map, markers);
+    });
+  };
+
+  // 2-1. 여러개의 마커 생성 (현재위치 기준 map 을 새로 랜더링)
+  const getMarkerList = (map: naver.maps.Map) => {
+    return MAP_LIST.map((item) => {
       const location = new naver.maps.LatLng(item.latitude, item.longitude);
       const marker = new naver.maps.Marker({
         position: location,
         map,
         icon: IMappin,
       });
-
-      // TODO - mappin 재생성 방지
-      // const bounds = map.getBounds();
-      // if (bounds.hasPoint(location)) {
-      //   naver.maps.Event.addListener(marker, "click", (e) => {
-      //     // setComponent((prev) => !prev);
-      //     console.log("marker event!!", item.id);
-      //   });
-      //   marker.setMap(map);
-      // } else {
-      //   marker.setMap(null);
-      // }
-    });
-  };
-
-  const getList = (map: any) => {
-    const markers = TEST.map((item) => {
-      const location = new naver.maps.LatLng(item.latitude, item.longitude);
-      const marker = new naver.maps.Marker({
-        position: location,
-        map,
-        icon: IMappin,
+      naver.maps.Event.addListener(marker, "click", (e) => {
+        // TODO - 아이디값을 가지고 검색 or 각 item data 로 전달
+        //  동일한 mappin id 선택 시 상세카드 제거
+        setComponent([item]);
       });
       return marker;
     });
-    console.log(markers);
-    return markers;
   };
 
-  const showMarkers = (map: any, markers: any) => {
+  // 2-2. 지도에 조건부 마커 렌더링
+  const showMarkers = (map: naver.maps.Map, markers: naver.maps.Marker[]) => {
     const bounds = map.getBounds();
     markers.map((marker: any) => {
       const position = marker.getPosition();
       if (bounds.hasPoint(position)) {
-        naver.maps.Event.addListener(marker, "click", (e) => {
-          // setComponent((prev) => !prev);
-          console.log("marker event!!", marker.id);
-        });
-        show(map, marker);
+        marker.setMap(map);
       } else {
-        hide(map, marker);
+        marker.setMap(null);
       }
     });
-  };
-
-  const show = (map: any, marker: any) => {
-    console.log(marker.getMap());
-    if (marker.getMap()) return;
-    marker.setMap(map);
-  };
-
-  const hide = (map: any, marker: any) => {
-    if (!marker.getMap()) return;
-    marker.setMap(null);
   };
 
   return (
     <MapWrapper>
       <div id="map" ref={mapEl} style={{ height: "100%" }}></div>
-      {component && (
-        <DetailCardWrapper>
-          <Card
-            id={1234}
-            title={"지도기업"}
-            img={""}
-            way={"차량"}
-            recycle={["캔", "유리", "비닐"]}
-            contents={"기업소개글입니다."}
-          />
-        </DetailCardWrapper>
-      )}
+      {component.length > 0 &&
+        component.map((item) => {
+          const { id, title, img, way, recycle, contents } = item;
+          return (
+            <DetailCardWrapper key={id}>
+              <Card id={id} title={title} img={img} way={way} recycle={recycle} contents={contents} />
+            </DetailCardWrapper>
+          );
+        })}
     </MapWrapper>
   );
 };
