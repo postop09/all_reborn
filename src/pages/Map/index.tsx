@@ -11,6 +11,7 @@ import IMappin from "../../assets/icon/icon_mappin_green.png";
 import IGPS from "../../assets/icon/icon_crosshair.png";
 import IMyLocation from "../../assets/icon/icon_myGPS.png";
 import "../../style/naverMap.css";
+import { MAP_LIST } from "../../mockData";
 
 type Location = {
   latitude: number;
@@ -65,63 +66,43 @@ const Index = () => {
     latitude: 37.2755704,
     longitude: 127.042399,
   });
-  const [component, setComponent] = useState(false);
-  const TEST = [
-    {
-      id: 1,
-      latitude: 37.1755704,
-      longitude: 127.042399,
-    },
-    {
-      id: 2,
-      latitude: 37.9755704,
-      longitude: 127.042399,
-    },
-    {
-      id: 3,
-      latitude: 38.1755704,
-      longitude: 127.042399,
-    },
-    {
-      id: 4,
-      latitude: 39.1755704,
-      longitude: 127.042399,
-    },
-    {
-      id: 5,
-      latitude: 36.1755704,
-      longitude: 127.042399,
-    },
-    {
-      id: 6,
-      latitude: 35.1755704,
-      longitude: 127.042399,
-    },
-    {
-      id: 7,
-      latitude: 35.1755704,
-      longitude: 126.042399,
-    },
-    {
-      id: 8,
-      latitude: 35.1755704,
-      longitude: 124.042399,
-    },
-    {
-      id: 9,
-      latitude: 35.1755704,
-      longitude: 127.942399,
-    },
-    {
-      id: 10,
-      latitude: 35.1755704,
-      longitude: 129.042399,
-    },
-  ];
+  const [components, setComponents] = useState<any[]>([]);
 
   // 0. 내 위치를 찾는다.
   useEffect(() => {
     getMyLocation();
+  }, []);
+
+  // 0-1. 내 위치 찾기
+  const getMyLocation = () => {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition((position) => {
+        console.log(position);
+        setMyLocation({
+          latitude: position.coords.latitude,
+          longitude: position.coords.longitude,
+        });
+      });
+    } else {
+      window.alert("현재위치를 알수 없습니다.");
+    }
+  };
+
+  useEffect(() => {
+    const location = new naver.maps.LatLng(myLocation.latitude, myLocation.longitude);
+    const mapOptions = {
+      center: location,
+      zoom: 14,
+      minZoom: 8,
+    };
+    const map = new naver.maps.Map(mapEl.current, mapOptions);
+
+    // 1-1. 내 위치를 기본적으로 표시한다.
+    const marker = new naver.maps.Marker({
+      position: location,
+      map,
+      icon: IMyLocation,
+    });
   }, []);
 
   // 1. 내 위치를 기준으로 지도를 연다.
@@ -130,6 +111,7 @@ const Index = () => {
     const mapOptions = {
       center: location,
       zoom: 14,
+      minZoom: 8,
     };
     const map = new naver.maps.Map(mapEl.current, mapOptions);
 
@@ -151,77 +133,79 @@ const Index = () => {
           position: naver.maps.Position.TOP_RIGHT,
         },
       );
-
-      // 내 위치에서 검색
-      const storeNearByGPS = new naver.maps.CustomControl(
-        `
-            <button type="button" class="btn_gps btn_here">여기서 찾기</button>
-          `,
-        {
-          position: naver.maps.Position.TOP_RIGHT,
-        },
-      );
-
-      storeNearByGPS.setMap(map);
       myGPS.setMap(map);
-
-      naver.maps.Event.addDOMListener(storeNearByGPS.getElement(), "click", () => {
-        console.log("주변 store 보여주기");
-      });
       naver.maps.Event.addDOMListener(myGPS.getElement(), "click", () => {
         map.setCenter(location);
       });
+
+      // 2. 현재 지도에서 마커 표시
+      showMarkersHere(map);
+
+      // 내 위치에서 검색
+      // const storeNearByGPS = new naver.maps.CustomControl(
+      //   `
+      //       <button type="button" class="btn_gps btn_here">여기서 찾기</button>
+      //     `,
+      //   {
+      //     position: naver.maps.Position.TOP_RIGHT,
+      //   },
+      // );
+      //
+      // storeNearByGPS.setMap(map);
     });
   }, [myLocation]);
 
-  // 0-1. 내 위치 찾기
-  const getMyLocation = () => {
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition((position) => {
-        console.log(position);
-        setMyLocation({
-          latitude: position.coords.latitude,
-          longitude: position.coords.longitude,
-        });
-      });
-    } else {
-      window.alert("현재위치를 알수 없습니다.");
-    }
+  // 2-3. 지도 idle 이벤트 적용
+  const showMarkersHere = (map: naver.maps.Map) => {
+    const markers = getMarkerList(map);
+    naver.maps.Event.addListener(map, "idle", function () {
+      showMarkers(map, markers);
+    });
   };
 
-  const getStoreList = (map: any) => {
-    const markers = TEST.map((item) => {
+  // 2-1. 여러개의 마커 생성 (현재위치 기준 map 을 새로 랜더링)
+  const getMarkerList = (map: naver.maps.Map) => {
+    return MAP_LIST.map((item) => {
       const location = new naver.maps.LatLng(item.latitude, item.longitude);
       const marker = new naver.maps.Marker({
         position: location,
         map,
         icon: IMappin,
       });
+      naver.maps.Event.addListener(marker, "click", (e) => {
+        // TODO - 아이디값을 가지고 검색 or 각 item data 로 전달
+        //  동일한 mappin id 선택 시 상세카드 제거
+        setComponents([item]);
+      });
       return marker;
     });
-    console.log(markers);
   };
 
-  // Marker 클릭 이벤트
-  // naver.maps.Event.addListener(marker, "click", (e) => {
-  //   setComponent((prev) => !prev);
-  // });
+  // 2-2. 지도에 조건부 마커 렌더링
+  const showMarkers = (map: naver.maps.Map, markers: naver.maps.Marker[]) => {
+    const bounds = map.getBounds();
+    markers.map((marker: any) => {
+      const position = marker.getPosition();
+      if (bounds.hasPoint(position)) {
+        marker.setMap(map);
+      } else {
+        marker.setMap(null);
+      }
+    });
+  };
 
   return (
     <MapWrapper>
-      <div ref={mapEl} style={{ height: "100%" }}></div>
-      {component && (
-        <DetailCardWrapper>
-          <Card
-            id={1234}
-            title={"지도기업"}
-            img={""}
-            way={"차량"}
-            recycle={["캔", "유리", "비닐"]}
-            contents={"기업소개글입니다."}
-          />
-        </DetailCardWrapper>
-      )}
+      <div id="map" ref={mapEl} style={{ height: "100%" }}></div>
+      {components.length > 0 &&
+        components.map((item) => {
+          const { id, title, img, way, recycle, contents } = item;
+          return (
+            <DetailCardWrapper key={id}>
+              <Card id={id} title={title} img={img} way={way} recycle={recycle} contents={contents} />
+            </DetailCardWrapper>
+          );
+        })}
     </MapWrapper>
   );
 };
@@ -230,7 +214,7 @@ export default Index;
 
 const MapWrapper = styled.div`
   position: relative;
-  height: 500px;
+  height: calc(100vh - 170px);
 `;
 
 const DetailCardWrapper = styled.div`
@@ -245,9 +229,3 @@ const DetailCardWrapper = styled.div`
     box-shadow: 3px 4px 4px #0f221626;
   }
 `;
-
-const style = {
-  width: "24px",
-  height: "24px",
-  backgroundColor: "${({ theme }) => theme.COLOR.keyWhite}",
-};
