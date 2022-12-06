@@ -66,12 +66,27 @@ const Index = () => {
     latitude: 37.2755704,
     longitude: 127.042399,
   });
-  const [component, setComponent] = useState<any[]>([]);
+  const [components, setComponents] = useState<any[]>([]);
 
   // 0. 내 위치를 찾는다.
   useEffect(() => {
     getMyLocation();
   }, []);
+
+  // 0-1. 내 위치 찾기
+  const getMyLocation = () => {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition((position) => {
+        console.log(position);
+        setMyLocation({
+          latitude: position.coords.latitude,
+          longitude: position.coords.longitude,
+        });
+      });
+    } else {
+      window.alert("현재위치를 알수 없습니다.");
+    }
+  };
 
   useEffect(() => {
     const location = new naver.maps.LatLng(myLocation.latitude, myLocation.longitude);
@@ -108,7 +123,6 @@ const Index = () => {
     });
 
     // 1-2. 커스텀 버튼을 생성한다.
-    // TODO - 리랜더링 시 재생성 되는 문제(그림자가 점점 짙어짐. 1번만 생성되도록 조치)
     naver.maps.Event.once(map, "init", () => {
       // 내 위치로 이동
       const myGPS = new naver.maps.CustomControl(
@@ -141,21 +155,6 @@ const Index = () => {
     });
   }, [myLocation]);
 
-  // 0-1. 내 위치 찾기
-  const getMyLocation = () => {
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition((position) => {
-        console.log(position);
-        setMyLocation({
-          latitude: position.coords.latitude,
-          longitude: position.coords.longitude,
-        });
-      });
-    } else {
-      window.alert("현재위치를 알수 없습니다.");
-    }
-  };
-
   // 2-3. 지도 idle 이벤트 적용
   const showMarkersHere = (map: naver.maps.Map) => {
     const markers = getMarkerList(map);
@@ -176,7 +175,7 @@ const Index = () => {
       naver.maps.Event.addListener(marker, "click", (e) => {
         // TODO - 아이디값을 가지고 검색 or 각 item data 로 전달
         //  동일한 mappin id 선택 시 상세카드 제거
-        setComponent([item]);
+        setComponents([item]);
       });
       return marker;
     });
@@ -198,8 +197,8 @@ const Index = () => {
   return (
     <MapWrapper>
       <div id="map" ref={mapEl} style={{ height: "100%" }}></div>
-      {component.length > 0 &&
-        component.map((item) => {
+      {components.length > 0 &&
+        components.map((item) => {
           const { id, title, img, way, recycle, contents } = item;
           return (
             <DetailCardWrapper key={id}>
