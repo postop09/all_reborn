@@ -63,12 +63,12 @@ const Index = () => {
   // NAVER MAP
   const mapEl = useRef<any>();
   const [myLocation, setMyLocation] = useState<Location>({
-    latitude: 37.2755704,
-    longitude: 127.042399,
+    latitude: 37.3595704,
+    longitude: 127.105399,
   });
   const [components, setComponents] = useState<any[]>([]);
 
-  // 0. 내 위치를 찾는다.
+  // 0. 내 위치
   useEffect(() => {
     getMyLocation();
   }, []);
@@ -77,7 +77,6 @@ const Index = () => {
   const getMyLocation = () => {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition((position) => {
-        console.log(position);
         setMyLocation({
           latitude: position.coords.latitude,
           longitude: position.coords.longitude,
@@ -88,25 +87,13 @@ const Index = () => {
     }
   };
 
+  // 1. 지도
   useEffect(() => {
-    const location = new naver.maps.LatLng(myLocation.latitude, myLocation.longitude);
-    const mapOptions = {
-      center: location,
-      zoom: 14,
-      minZoom: 8,
-    };
-    const map = new naver.maps.Map(mapEl.current, mapOptions);
-
-    // 1-1. 내 위치를 기본적으로 표시한다.
-    const marker = new naver.maps.Marker({
-      position: location,
-      map,
-      icon: IMyLocation,
-    });
+    setMapInitial();
   }, []);
 
-  // 1. 내 위치를 기준으로 지도를 연다.
-  useEffect(() => {
+  // 1-1. 지도 생성
+  const setMapInitial = () => {
     const location = new naver.maps.LatLng(myLocation.latitude, myLocation.longitude);
     const mapOptions = {
       center: location,
@@ -114,15 +101,19 @@ const Index = () => {
       minZoom: 8,
     };
     const map = new naver.maps.Map(mapEl.current, mapOptions);
-
-    // 1-1. 내 위치를 기본적으로 표시한다.
     const marker = new naver.maps.Marker({
       position: location,
       map,
       icon: IMyLocation,
     });
+    return [map, location];
+  };
 
-    // 1-2. 커스텀 버튼을 생성한다.
+  // 2. 지도 이벤트
+  useEffect(() => {
+    const [map, location] = setMapInitial();
+
+    // 2-1. 커스텀 버튼을 생성한다.
     naver.maps.Event.once(map, "init", () => {
       // 내 위치로 이동
       const myGPS = new naver.maps.CustomControl(
@@ -138,24 +129,13 @@ const Index = () => {
         map.setCenter(location);
       });
 
-      // 2. 현재 지도에서 마커 표시
+      // 2-2. 현재 지도에서 주변 마커 표시
       showMarkersHere(map);
-
-      // 내 위치에서 검색
-      // const storeNearByGPS = new naver.maps.CustomControl(
-      //   `
-      //       <button type="button" class="btn_gps btn_here">여기서 찾기</button>
-      //     `,
-      //   {
-      //     position: naver.maps.Position.TOP_RIGHT,
-      //   },
-      // );
-      //
-      // storeNearByGPS.setMap(map);
+      // TODO - 내 위치에서 검색
     });
   }, [myLocation]);
 
-  // 2-3. 지도 idle 이벤트 적용
+  // 3. 지도 idle 이벤트 적용
   const showMarkersHere = (map: naver.maps.Map) => {
     const markers = getMarkerList(map);
     naver.maps.Event.addListener(map, "idle", function () {
@@ -163,7 +143,7 @@ const Index = () => {
     });
   };
 
-  // 2-1. 여러개의 마커 생성 (현재위치 기준 map 을 새로 랜더링)
+  // 3-1. 여러개의 마커 생성 (현재위치 기준 map 을 새로 랜더링)
   const getMarkerList = (map: naver.maps.Map) => {
     return MAP_LIST.map((item) => {
       const location = new naver.maps.LatLng(item.latitude, item.longitude);
@@ -181,7 +161,7 @@ const Index = () => {
     });
   };
 
-  // 2-2. 지도에 조건부 마커 렌더링
+  // 3-2. 지도에 조건부 마커 렌더링
   const showMarkers = (map: naver.maps.Map, markers: naver.maps.Marker[]) => {
     const bounds = map.getBounds();
     markers.map((marker: any) => {
