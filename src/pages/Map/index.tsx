@@ -63,8 +63,8 @@ const Index = () => {
   // NAVER MAP
   const mapEl = useRef<any>();
   const [myLocation, setMyLocation] = useState<Location>({
-    latitude: 37.2755704,
-    longitude: 127.042399,
+    latitude: 37.3595704,
+    longitude: 127.105399,
   });
   const [components, setComponents] = useState<any[]>([]);
 
@@ -77,7 +77,6 @@ const Index = () => {
   const getMyLocation = () => {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition((position) => {
-        console.log(position);
         setMyLocation({
           latitude: position.coords.latitude,
           longitude: position.coords.longitude,
@@ -88,6 +87,7 @@ const Index = () => {
     }
   };
 
+  // 1. 지도 생성
   useEffect(() => {
     const location = new naver.maps.LatLng(myLocation.latitude, myLocation.longitude);
     const mapOptions = {
