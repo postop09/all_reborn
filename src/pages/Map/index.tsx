@@ -111,7 +111,7 @@ const Index = () => {
 
   // 2. 지도 이벤트
   useEffect(() => {
-    const [map, location] = setMapInitial();
+    const [map, location]: any = setMapInitial();
 
     // 2-1. 커스텀 버튼을 생성한다.
     naver.maps.Event.once(map, "init", () => {
