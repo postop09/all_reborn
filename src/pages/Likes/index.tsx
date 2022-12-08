@@ -103,6 +103,18 @@ const Ul = styled.ul`
   flex-wrap: wrap;
   row-gap: 12px;
   justify-content: space-between;
+
+  &::after {
+    content: "";
+    display: block;
+    width: 109px;
+    @media screen and (max-width: 380px) {
+      width: 100px;
+    }
+    @media screen and (min-width: 415px) {
+      width: 120px;
+    }
+  }
 `;
 
 const TxtWrapper = styled.p`
