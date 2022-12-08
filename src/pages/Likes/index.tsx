@@ -108,7 +108,6 @@ const Ul = styled.ul`
     content: "";
     display: block;
     width: 109px;
-
     @media screen and (max-width: 380px) {
       width: 100px;
     }
