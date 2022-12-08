@@ -126,7 +126,7 @@ const Index = () => {
       );
       myGPS.setMap(map);
       naver.maps.Event.addDOMListener(myGPS.getElement(), "click", () => {
-        map.setCenter(location);
+        setMapInitial();
       });
 
       // 2-2. 현재 지도에서 주변 마커 표시
