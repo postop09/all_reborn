@@ -109,6 +109,8 @@ const Index = () => {
     return [map, location];
   };
 
+  // TODO - 내 위치로 이동: 모바일에서 제대로 작동하지 않음.
+  //  react-naver-map 찾아보자.
   // 2. 지도 이벤트
   useEffect(() => {
     const [map, location]: any = setMapInitial();
