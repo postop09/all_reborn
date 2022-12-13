@@ -81,6 +81,8 @@ const Index = () => {
           latitude: position.coords.latitude,
           longitude: position.coords.longitude,
         });
+        console.log(position);
+        alert(`${position.coords.latitude} ${position.coords.longitude}`);
       });
     } else {
       window.alert("현재위치를 알수 없습니다.");
@@ -109,6 +111,8 @@ const Index = () => {
     return [map, location];
   };
 
+  // TODO - 내 위치로 이동: 모바일에서 제대로 작동하지 않음.
+  //  react-naver-map 찾아보자.
   // 2. 지도 이벤트
   useEffect(() => {
     const [map, location]: any = setMapInitial();
@@ -126,7 +130,7 @@ const Index = () => {
       );
       myGPS.setMap(map);
       naver.maps.Event.addDOMListener(myGPS.getElement(), "click", () => {
-        setMapInitial();
+        getMyLocation();
       });
 
       // 2-2. 현재 지도에서 주변 마커 표시
