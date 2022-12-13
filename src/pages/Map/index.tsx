@@ -81,6 +81,8 @@ const Index = () => {
           latitude: position.coords.latitude,
           longitude: position.coords.longitude,
         });
+        console.log(position);
+        alert(`${position.coords.latitude} ${position.coords.longitude}`);
       });
     } else {
       window.alert("현재위치를 알수 없습니다.");
@@ -128,7 +130,7 @@ const Index = () => {
       );
       myGPS.setMap(map);
       naver.maps.Event.addDOMListener(myGPS.getElement(), "click", () => {
-        setMapInitial();
+        getMyLocation();
       });
 
       // 2-2. 현재 지도에서 주변 마커 표시
