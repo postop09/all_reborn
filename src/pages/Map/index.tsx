@@ -75,15 +75,21 @@ const Index = () => {
 
   // 0-1. 내 위치 찾기
   const getMyLocation = () => {
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition((position) => {
-        setMyLocation({
-          latitude: position.coords.latitude,
-          longitude: position.coords.longitude,
-        });
-        console.log(position);
-        alert(`${position.coords.latitude} ${position.coords.longitude}`);
+    alert("위치 찾기 함수 실행");
+    const success = (position: any) => {
+      setMyLocation({
+        latitude: position.coords.latitude,
+        longitude: position.coords.longitude,
       });
+      alert(`${position.coords.latitude} ${position.coords.longitude}`);
+    };
+
+    const error = (err: any) => {
+      alert(err.message);
+    };
+
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(success, error);
     } else {
       window.alert("현재위치를 알수 없습니다.");
     }
