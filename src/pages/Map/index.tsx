@@ -12,6 +12,8 @@ import IGPS from "../../assets/icon/icon_crosshair.png";
 import IMyLocation from "../../assets/icon/icon_myGPS.png";
 import "../../style/naverMap.css";
 import { MAP_LIST } from "../../mockData";
+import { toast } from "react-toastify";
+import success = toast.success;
 
 type Location = {
   latitude: number;
@@ -75,20 +77,18 @@ const Index = () => {
 
   // 0-1. 내 위치 찾기
   const getMyLocation = () => {
-    alert("위치 찾기 함수 실행");
     const success = (position: any) => {
       setMyLocation({
         latitude: position.coords.latitude,
         longitude: position.coords.longitude,
       });
-      alert(`${position.coords.latitude} ${position.coords.longitude}`);
     };
 
     const error = (err: any) => {
       alert(err.message);
     };
 
-    if (navigator.geolocation) {
+    if ("geolocation" in navigator) {
       navigator.geolocation.getCurrentPosition(success, error);
     } else {
       window.alert("현재위치를 알수 없습니다.");
@@ -184,8 +184,27 @@ const Index = () => {
     });
   };
 
+  const getPosition = () => {
+    const gps = navigator.geolocation;
+    console.log(gps);
+
+    const successFn = (data: any) => {
+      console.log(data);
+      const lat = data.coords.latitude;
+      const lon = data.coords.longitude;
+      alert(`${lat} ${lon}`);
+    };
+
+    if (gps) {
+      gps.getCurrentPosition(successFn);
+    }
+  };
+
   return (
     <MapWrapper>
+      <button type="button" onClick={getPosition}>
+        위치확인
+      </button>
       <div id="map" ref={mapEl} style={{ height: "100%" }}></div>
       {components.length > 0 &&
         components.map((item) => {
