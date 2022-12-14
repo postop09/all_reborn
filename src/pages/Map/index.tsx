@@ -12,8 +12,6 @@ import IGPS from "../../assets/icon/icon_crosshair.png";
 import IMyLocation from "../../assets/icon/icon_myGPS.png";
 import "../../style/naverMap.css";
 import { MAP_LIST } from "../../mockData";
-import { toast } from "react-toastify";
-import success = toast.success;
 
 type Location = {
   latitude: number;
@@ -70,9 +68,9 @@ const Index = () => {
   });
   const [components, setComponents] = useState<any[]>([]);
 
-  // 0. 내 위치
   useEffect(() => {
     getMyLocation();
+    setMapInitial();
   }, []);
 
   // 0-1. 내 위치 찾기
@@ -95,11 +93,6 @@ const Index = () => {
     }
   };
 
-  // 1. 지도
-  useEffect(() => {
-    setMapInitial();
-  }, []);
-
   // 1-1. 지도 생성
   const setMapInitial = () => {
     const location = new naver.maps.LatLng(myLocation.latitude, myLocation.longitude);
@@ -107,6 +100,8 @@ const Index = () => {
       center: location,
       zoom: 14,
       minZoom: 8,
+      scaleControl: false,
+      mapDataControl: false,
     };
     const map = new naver.maps.Map(mapEl.current, mapOptions);
     const marker = new naver.maps.Marker({
@@ -117,8 +112,7 @@ const Index = () => {
     return [map, location];
   };
 
-  // TODO - 내 위치로 이동: 모바일에서 제대로 작동하지 않음.
-  //  react-naver-map 찾아보자.
+  // TODO - 내 위치로 이동: 모바일에서 제대로 작동하지 않음. (웹에서 위치서비스 허용 후에는 잘 작동된다. (?))
   // 2. 지도 이벤트
   useEffect(() => {
     const [map, location]: any = setMapInitial();
@@ -184,27 +178,8 @@ const Index = () => {
     });
   };
 
-  const getPosition = () => {
-    const gps = navigator.geolocation;
-    console.log(gps);
-
-    const successFn = (data: any) => {
-      console.log(data);
-      const lat = data.coords.latitude;
-      const lon = data.coords.longitude;
-      alert(`${lat} ${lon}`);
-    };
-
-    if (gps) {
-      gps.getCurrentPosition(successFn);
-    }
-  };
-
   return (
     <MapWrapper>
-      <button type="button" onClick={getPosition}>
-        위치확인
-      </button>
       <div id="map" ref={mapEl} style={{ height: "100%" }}></div>
       {components.length > 0 &&
         components.map((item) => {
