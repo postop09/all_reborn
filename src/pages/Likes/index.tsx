@@ -78,7 +78,7 @@ const Index = () => {
           </button>
         </TxtWrapper>
       )}
-      <MyModal isOpen={isOpen} setIsOpen={setIsOpen} />
+      <MyModal isOpen={isOpen} setIsOpen={setIsOpen} contents={"모달창입니다."} />
     </Wrapper>
   );
 };
