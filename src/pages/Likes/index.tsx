@@ -8,12 +8,15 @@ import { onGetLikes } from "../../util/handleLikes";
 import { CardProps } from "../../util/type";
 import CardSimple from "../../components/CardSimple";
 
+// import Modal from "../../components/modal/Modal";
+
 interface List extends Array<CardProps> {}
 
 const Index = () => {
   const [productSelect, setProductSelect] = useState("");
   const [recycleSelect, setRecycleSelect] = useState("");
   const [list, setList] = useState<List>([]);
+  // const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
     onFilterLikes();
@@ -73,6 +76,7 @@ const Index = () => {
           <span>팀 올리본으로 연락주세요!</span>
         </TxtWrapper>
       )}
+      {/*<Modal isOpen={isOpen} setIsOpen={setIsOpen} contents={"모달창입니다."} />*/}
     </Wrapper>
   );
 };
