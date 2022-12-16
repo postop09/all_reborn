@@ -1,7 +1,7 @@
 import Modal from "react-modal";
 import styled from "styled-components";
 
-const MyModal = ({ isOpen, setIsOpen, contents }) => {
+const Modal = ({ isOpen, setIsOpen, contents }) => {
   const overlay = {
     zIndex: "9999",
     backgroundColor: "#00000040",
@@ -17,7 +17,7 @@ const MyModal = ({ isOpen, setIsOpen, contents }) => {
   );
 };
 
-export default MyModal;
+export default Modal;
 
 const ContentWrapper = styled.p`
   padding: 36px 20px 20px 20px;

@@ -7,7 +7,8 @@ import * as mockData from "../../mockData";
 import { onGetLikes } from "../../util/handleLikes";
 import { CardProps } from "../../util/type";
 import CardSimple from "../../components/CardSimple";
-import MyModal from "../../components/modal/MyModal";
+
+// import Modal from "../../components/modal/Modal";
 
 interface List extends Array<CardProps> {}
 
@@ -15,7 +16,7 @@ const Index = () => {
   const [productSelect, setProductSelect] = useState("");
   const [recycleSelect, setRecycleSelect] = useState("");
   const [list, setList] = useState<List>([]);
-  const [isOpen, setIsOpen] = useState(false);
+  // const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
     onFilterLikes();
@@ -73,12 +74,9 @@ const Index = () => {
           <span>좋아요를 누른 기업이 없습니다.</span>
           <span>올리본에 등록되길 원하는 기업이 있으시면,</span>
           <span>팀 올리본으로 연락주세요!</span>
-          <button type="button" onClick={() => setIsOpen((prev) => !prev)}>
-            모달
-          </button>
         </TxtWrapper>
       )}
-      <MyModal isOpen={isOpen} setIsOpen={setIsOpen} contents={"모달창입니다."} />
+      {/*<Modal isOpen={isOpen} setIsOpen={setIsOpen} contents={"모달창입니다."} />*/}
     </Wrapper>
   );
 };
