@@ -25,7 +25,6 @@ const AppProvider = ({ children }: contextProps) => {
     }
   }, []);
 
-  // TODO - store type 설정 고민해봐야 함.
   const store = {
     recentKeyword,
     setRecentKeyword,
