@@ -1,11 +1,12 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { Ref, useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import Card from "../../components/Card";
 import IMappin from "../../assets/icon/icon_mappin_green.png";
 import IGPS from "../../assets/icon/icon_crosshair.png";
 import IMyLocation from "../../assets/icon/icon_myGPS.png";
-import "../../style/naverMap.css";
 import { MAP_LIST } from "../../mockData";
+import { MapCards } from "../../util/type";
+import "../../style/naverMap.css";
 
 type Location = {
   latitude: number;
@@ -19,7 +20,7 @@ const Index = () => {
     latitude: 37.3595704,
     longitude: 127.105399,
   });
-  const [components, setComponents] = useState<any[]>([]);
+  const [components, setComponents] = useState<MapCards[]>([]);
 
   useEffect(() => {
     getMyLocation();
@@ -28,14 +29,14 @@ const Index = () => {
 
   // 0-1. 내 위치 찾기
   const getMyLocation = () => {
-    const success = (position: any) => {
+    const success = (position: GeolocationPosition) => {
       setMyLocation({
         latitude: position.coords.latitude,
         longitude: position.coords.longitude,
       });
     };
 
-    const error = (err: any) => {
+    const error = (err: GeolocationPositionError) => {
       alert(err.message);
     };
 
@@ -47,7 +48,7 @@ const Index = () => {
   };
 
   // 1-1. 지도 생성
-  const setMapInitial = () => {
+  const setMapInitial = (): [naver.maps.Map, naver.maps.LatLng] => {
     const location = new naver.maps.LatLng(myLocation.latitude, myLocation.longitude);
     const mapOptions = {
       center: location,
@@ -68,11 +69,10 @@ const Index = () => {
   // TODO - 내 위치로 이동: 모바일에서 제대로 작동하지 않음. (웹에서 위치서비스 허용 후에는 잘 작동된다. (?))
   // 2. 지도 이벤트
   useEffect(() => {
-    const [map, location]: any = setMapInitial();
+    const [map] = setMapInitial();
 
-    // 2-1. 커스텀 버튼을 생성한다.
+    // 2-1. 내 위치로 이동 커스텀 버튼 생성
     naver.maps.Event.once(map, "init", () => {
-      // 내 위치로 이동
       const myGPS = new naver.maps.CustomControl(
         `
             <button type="button" class="btn_gps"><img src="${IGPS}" alt='내위치' class="icon_gps"/></button>
@@ -88,7 +88,6 @@ const Index = () => {
 
       // 2-2. 현재 지도에서 주변 마커 표시
       showMarkersHere(map);
-      // TODO - 내 위치에서 검색
     });
   }, [myLocation]);
 
@@ -121,7 +120,7 @@ const Index = () => {
   // 3-2. 지도에 조건부 마커 렌더링
   const showMarkers = (map: naver.maps.Map, markers: naver.maps.Marker[]) => {
     const bounds = map.getBounds();
-    markers.map((marker: any) => {
+    markers.map((marker) => {
       const position = marker.getPosition();
       if (bounds.hasPoint(position)) {
         marker.setMap(map);
