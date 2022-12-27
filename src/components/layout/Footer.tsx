@@ -54,7 +54,7 @@ const FooterWrapper = styled.footer`
   box-shadow: 0px -5px 7px 2px #00000020;
   border-top-left-radius: ${({ theme }) => theme.ROUND.md};
   border-top-right-radius: ${({ theme }) => theme.ROUND.md};
-  padding: 16px 0 24px;
+  padding: 10px 0 14px;
   background: white;
   z-index: 900;
 `;

@@ -94,7 +94,7 @@ const Index = () => {
   // 3. 지도 idle 이벤트 적용
   const showMarkersHere = (map: naver.maps.Map) => {
     const markers = getMarkerList(map);
-    naver.maps.Event.addListener(map, "idle", function () {
+    naver.maps.Event.addListener(map, "idle", () => {
       showMarkers(map, markers);
     });
   };
@@ -109,8 +109,6 @@ const Index = () => {
         icon: IMappin,
       });
       naver.maps.Event.addListener(marker, "click", (e) => {
-        // TODO - 아이디값을 가지고 검색 or 각 item data 로 전달
-        //  동일한 mappin id 선택 시 상세카드 제거
         setComponents([item]);
       });
       return marker;
@@ -150,7 +148,7 @@ export default Index;
 
 const MapWrapper = styled.div`
   position: relative;
-  height: calc(100vh - 170px);
+  height: calc(100vh - 135px);
 `;
 
 const DetailCardWrapper = styled.div`

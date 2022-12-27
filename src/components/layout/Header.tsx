@@ -44,8 +44,6 @@ const Header = () => {
     }
   };
 
-  // TODO - ContextAPI 를 이용해서 검색값, 검색 결과, 검색어 컨트롤
-  //  검색에 성공하면 pushRecentKeyword
   const fetchSearchList = async (path: string) => {
     try {
       const res = await fetch(`/${path}`);
@@ -140,7 +138,7 @@ const Ul = styled.ul`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 17px 16px;
+  padding: 10px 16px;
 `;
 
 const LiSearch = styled.li`
