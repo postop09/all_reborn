@@ -1,4 +1,4 @@
-import React, { Ref, useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import Card from "../../components/Card";
 import IMappin from "../../assets/icon/icon_mappin_green.png";
