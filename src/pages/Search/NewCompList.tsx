@@ -8,10 +8,10 @@ const NewCompList = () => {
   const [list, setList] = useState([]);
 
   useEffect(() => {
-    fetchList();
+    getList();
   }, []);
 
-  const fetchList = async () => {
+  const getList = async () => {
     if (process.env.NODE_ENV === "development") {
       const res = await fetch("/list");
       const json = await res.json();
@@ -31,6 +31,7 @@ const NewCompList = () => {
       </section>
     );
   }
+
   return (
     <section>
       <TitleH3>최근에 등록되었어요</TitleH3>

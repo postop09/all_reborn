@@ -11,19 +11,17 @@ const Index = () => {
   const [recycleSelect, setRecycleSelect] = useState("");
   const [list, setList] = useState([]);
 
-  // 테스트용 데이터 호출
   useEffect(() => {
-    fetchList();
+    getList();
   }, []);
 
-  const fetchList = async () => {
+  const getList = async () => {
     if (process.env.NODE_ENV === "development") {
       const res = await fetch("/list");
       const json = await res.json();
       const data = json.data;
       setList(data);
     } else {
-      // 임시
       const mockList: any = mockData.list;
       setList(mockList);
     }

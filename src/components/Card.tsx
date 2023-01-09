@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { Icon16, Img109 } from "../style/style";
 import { OneWayButton } from "./Button";
-import { CardProps } from "../util/type";
+import { CardProps } from "../types/type";
 import ILike from "../assets/icon/icon_like.png";
 import ILikeE from "../assets/icon/icon_like_empty.png";
 import { onChangeLikes, onCheckLikes } from "../util/handleLikes";
@@ -22,13 +22,10 @@ const Card = (props: CardProps) => {
     }
   }, []);
 
-  // 상세조회
   const onDetail = () => {
-    // TODO - 선택한 항목의 id 값으로 API 호출이 성공하면 이동
     navigate(`/detail?title=${title}`);
   };
 
-  // 좋아요
   const onLike = () => {
     onChangeLikes(id);
     setLike((prev) => !prev);

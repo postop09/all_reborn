@@ -12,8 +12,6 @@ import INoSearch from "../../assets/image/img_noSearch.png";
 const Index = () => {
   const [productSelect, setProductSelect] = useState("");
   const [recycleSelect, setRecycleSelect] = useState("");
-  // TODO - 검색결과를 contextAPI 에서 가져와서 페이지를 렌더링 시킨다.
-  // const { searchList, searchCase, setSearchCase} = useContext(AppContext);
   const { searchList, searchCase, setSearchCase }: any = useContext(AppContext);
 
   useEffect(() => {
