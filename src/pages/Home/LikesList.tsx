@@ -4,7 +4,7 @@ import styled from "styled-components";
 import { TitleH3 } from "../../style/style";
 import * as mockData from "../../mockData";
 import { onGetLikes } from "../../util/handleLikes";
-import { CardProps } from "../../util/type";
+import { CardProps } from "../../types/type";
 
 interface List extends Array<CardProps> {}
 
@@ -15,7 +15,6 @@ const LikesList = () => {
     onFilterLikes();
   }, []);
 
-  // 전체기업 중 좋아요 기업 출력
   const onFilterLikes = () => {
     const storage = onGetLikes();
     const data = mockData.list;

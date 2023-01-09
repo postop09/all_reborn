@@ -1,6 +1,6 @@
 import React from "react";
 import Card from "./Card";
-import { CardProps } from "../util/type";
+import { CardProps } from "../types/type";
 import styled from "styled-components";
 
 type List<T> = {

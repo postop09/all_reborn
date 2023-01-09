@@ -5,7 +5,7 @@ import IMappin from "../../assets/icon/icon_mappin_green.png";
 import IGPS from "../../assets/icon/icon_crosshair.png";
 import IMyLocation from "../../assets/icon/icon_myGPS.png";
 import { MAP_LIST } from "../../mockData";
-import { MapCards } from "../../util/type";
+import { MapCards } from "../../types/type";
 import "../../style/naverMap.css";
 
 type Location = {

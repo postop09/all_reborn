@@ -8,10 +8,8 @@ import { AppContext } from "../../context/AppContext";
 const RecentList = () => {
   const { recentKeyword, setRecentKeyword }: any = useContext(AppContext);
 
-  // TODO - ContextAPI - useContext 를 이용해서 전역 데이터를 가져와야 할듯 + store type 설정
   const popKeyword = (keyword: string) => {
     const storage = localStorage.getItem("recentKeyword");
-
     if (storage) {
       const arr = JSON.parse(storage);
       const filter = arr.filter((item: string) => item !== keyword);
@@ -20,7 +18,6 @@ const RecentList = () => {
     }
   };
 
-  // reverse 는 원본배열을 수정한다. copy 배열을 사용.
   if (recentKeyword.length > 0) {
     const reverseList = [...recentKeyword].reverse();
 

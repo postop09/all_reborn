@@ -26,7 +26,6 @@ const CardSimple = (props: CardSimpleProps) => {
     }
   }, []);
 
-  // 좋아요
   const onLike = () => {
     onChangeLikes(id);
     setLike((prev) => !prev);
@@ -34,7 +33,6 @@ const CardSimple = (props: CardSimpleProps) => {
   };
 
   const onDetail = () => {
-    // TODO - 선택한 항목의 id 값으로 API 호출이 성공하면 이동
     navigate(`/detail?title=${name}`, {
       state: type,
     });
