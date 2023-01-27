@@ -1,13 +1,13 @@
 import React, { useContext, useEffect, useState } from "react";
-import CardList from "../../components/CardList";
-import styled from "styled-components";
-import RecentList from "./RecentList";
-import RecommendList from "./RecommendList";
-import NewCompList from "./NewCompList";
+import CardList from "../../components/CardList/CardList";
+import RecentList from "./RecentList/RecentList";
+import RecommendList from "./RecommendList/RecommendList";
+import NewCompList from "./NewCompList/NewCompList";
 import { AppContext } from "../../context/AppContext";
-import DropDown from "../../components/DropDown";
-import { PRODUCT_LIST, RECYCLE_LIST } from "../../const/const";
+import DropDown from "../../components/DropDown/DropDown";
+import { PRODUCT_LIST, RECYCLE_LIST } from "../../const/keywordList";
 import INoSearch from "../../assets/image/img_noSearch.png";
+import * as S from "./index.style";
 
 const Index = () => {
   const [productSelect, setProductSelect] = useState("");
@@ -21,10 +21,10 @@ const Index = () => {
   // 검색 결과가 있는 화면
   if (searchCase === "hasData") {
     return (
-      <Wrapper>
-        <HiddenTitle>검색 결과</HiddenTitle>
-        <CateWrapper>
-          <TxtSearchCount>검색결과 1,000개</TxtSearchCount>
+      <S.Wrapper>
+        <S.HiddenTitle>검색 결과</S.HiddenTitle>
+        <S.CateWrapper>
+          <S.TxtSearchCount>검색결과 1,000개</S.TxtSearchCount>
           <DropDown
             list={PRODUCT_LIST}
             select={productSelect}
@@ -37,70 +37,29 @@ const Index = () => {
             setSelect={setRecycleSelect}
             defaultValue={"재활용품 종류"}
           />
-        </CateWrapper>
+        </S.CateWrapper>
         <CardList data={searchList} />
-      </Wrapper>
+      </S.Wrapper>
     );
   }
 
   // 최초 검색 화면
   return (
-    <Wrapper>
-      <HiddenTitle>검색</HiddenTitle>
+    <S.Wrapper>
+      <S.HiddenTitle>검색</S.HiddenTitle>
       <RecentList />
       {searchCase === "noData" && (
-        <TxtNoList>
+        <S.TxtNoList>
           <img src={INoSearch} alt="" />
           <span>[{searchList[0]}]</span> 에 대한 검색결과가 없습니다.
-        </TxtNoList>
+        </S.TxtNoList>
       )}
-      <SubWrapper>
+      <S.SubWrapper>
         <RecommendList />
         <NewCompList />
-      </SubWrapper>
-    </Wrapper>
+      </S.SubWrapper>
+    </S.Wrapper>
   );
 };
 
 export default Index;
-
-const Wrapper = styled.section`
-  padding: 20px 16px 0;
-`;
-
-const HiddenTitle = styled.h2`
-  ${({ theme }) => theme.TEXT.hide};
-`;
-
-const SubWrapper = styled.div`
-  text-align: center;
-`;
-
-const CateWrapper = styled.div`
-  display: flex;
-  align-items: center;
-  margin-bottom: 12px;
-`;
-
-const TxtSearchCount = styled.p`
-  margin-right: auto;
-  ${({ theme }) => theme.TEXT.label12};
-`;
-
-const TxtNoList = styled.p`
-  margin-bottom: 20px;
-  text-align: center;
-  color: ${({ theme }) => theme.COLOR.pointOriginal};
-  ${({ theme }) => theme.TEXT.body14};
-
-  img {
-    display: block;
-    width: 34px;
-    height: 34px;
-    margin: 0 auto 12px;
-  }
-
-  span {
-    color: ${({ theme }) => theme.COLOR.pointBlack};
-  }
-`;

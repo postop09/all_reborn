@@ -1,28 +1,20 @@
 import React from "react";
-import styled from "styled-components";
-import CompanyList from "./CompanyList";
-import LikesList from "./LikesList";
-import Banner from "./Banner";
+import CompanyList from "./CompanyList/CompanyList";
+import LikesList from "./LikeList/LikesList";
+import Banner from "./Banner/Banner";
+import * as S from "./index.style";
 
 const Index = () => {
   return (
     <>
-      <HiddenTitle>홈</HiddenTitle>
+      <S.HiddenTitle>홈</S.HiddenTitle>
       <Banner />
-      <Wrapper>
+      <S.Wrapper>
         <LikesList />
         <CompanyList />
-      </Wrapper>
+      </S.Wrapper>
     </>
   );
 };
 
 export default Index;
-
-const HiddenTitle = styled.h2`
-  ${({ theme }) => theme.TEXT.hide};
-`;
-
-const Wrapper = styled.div`
-  padding: 20px 16px 0;
-`;

@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
-import DropDown from "../../components/DropDown";
-import { PRODUCT_LIST, RECYCLE_LIST } from "../../const/const";
-import styled from "styled-components";
+import DropDown from "../../components/DropDown/DropDown";
+import { PRODUCT_LIST, RECYCLE_LIST } from "../../const/keywordList";
 import INoLikes from "../../assets/image/img_noLikes.png";
 import * as mockData from "../../mockData";
 import { onGetLikes } from "../../util/handleLikes";
 import { CardProps } from "../../types/type";
-import CardSimple from "../../components/CardSimple";
+import CardSimple from "../../components/CardSimple/CardSimple";
+import * as S from "./index.style";
 
 interface List extends Array<CardProps> {}
 
@@ -37,10 +37,10 @@ const Index = () => {
   };
 
   return (
-    <Wrapper>
-      <HiddenTitle>기업목록</HiddenTitle>
-      <CateWrapper>
-        <TxtSearchCount>전체 {list.length}개</TxtSearchCount>
+    <S.Wrapper>
+      <S.HiddenTitle>기업목록</S.HiddenTitle>
+      <S.CateWrapper>
+        <S.TxtSearchCount>전체 {list.length}개</S.TxtSearchCount>
         {list.length > 0 && (
           <>
             <DropDown
@@ -57,78 +57,23 @@ const Index = () => {
             />
           </>
         )}
-      </CateWrapper>
+      </S.CateWrapper>
       {list.length > 0 ? (
-        <Ul>
+        <S.Ul>
           {list.map((item) => {
             return <CardSimple key={item.id} id={item.id} img={item.img} name={item.title} likable={true} />;
           })}
-        </Ul>
+        </S.Ul>
       ) : (
-        <TxtWrapper>
+        <S.TxtWrapper>
           <img src={INoLikes} alt="" />
           <span>좋아요를 누른 기업이 없습니다.</span>
           <span>올리본에 등록되길 원하는 기업이 있으시면,</span>
           <span>팀 올리본으로 연락주세요!</span>
-        </TxtWrapper>
+        </S.TxtWrapper>
       )}
-    </Wrapper>
+    </S.Wrapper>
   );
 };
 
 export default Index;
-
-const Wrapper = styled.section`
-  padding: 20px 16px 0;
-`;
-
-const HiddenTitle = styled.h2`
-  ${({ theme }) => theme.TEXT.hide};
-`;
-
-const CateWrapper = styled.div`
-  display: flex;
-  align-items: center;
-  margin-bottom: 12px;
-`;
-
-const TxtSearchCount = styled.p`
-  margin-right: auto;
-  ${({ theme }) => theme.TEXT.label12};
-`;
-
-const Ul = styled.ul`
-  display: flex;
-  flex-wrap: wrap;
-  row-gap: 12px;
-  justify-content: space-between;
-
-  &::after {
-    content: "";
-    display: block;
-    width: 109px;
-    @media screen and (max-width: 380px) {
-      width: 100px;
-    }
-    @media screen and (min-width: 415px) {
-      width: 120px;
-    }
-  }
-`;
-
-const TxtWrapper = styled.p`
-  ${({ theme }) => theme.TEXT.body16};
-  text-align: center;
-  color: ${({ theme }) => theme.COLOR.keyOriginal};
-
-  img {
-    display: inline-block;
-    width: 40px;
-    height: 40px;
-    margin-bottom: 20px;
-  }
-
-  span {
-    display: block;
-  }
-`;

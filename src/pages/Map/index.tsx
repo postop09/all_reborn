@@ -1,12 +1,12 @@
 import React, { useEffect, useRef, useState } from "react";
-import styled from "styled-components";
-import Card from "../../components/Card";
+import Card from "../../components/Card/Card";
 import IMappin from "../../assets/icon/icon_mappin_green.png";
 import IGPS from "../../assets/icon/icon_crosshair.png";
 import IMyLocation from "../../assets/icon/icon_myGPS.png";
 import { MAP_LIST } from "../../mockData";
 import { MapCards } from "../../types/type";
 import "../../style/naverMap.css";
+import * as S from "./index.style";
 
 type Location = {
   latitude: number;
@@ -129,37 +129,19 @@ const Index = () => {
   };
 
   return (
-    <MapWrapper>
+    <S.MapWrapper>
       <div id="map" ref={mapEl} style={{ height: "100%" }}></div>
       {components.length > 0 &&
         components.map((item) => {
           const { id, title, img, way, recycle, contents } = item;
           return (
-            <DetailCardWrapper key={id}>
+            <S.DetailCardWrapper key={id}>
               <Card id={id} title={title} img={img} way={way} recycle={recycle} contents={contents} />
-            </DetailCardWrapper>
+            </S.DetailCardWrapper>
           );
         })}
-    </MapWrapper>
+    </S.MapWrapper>
   );
 };
 
 export default Index;
-
-const MapWrapper = styled.div`
-  position: relative;
-  height: calc(100vh - 135px);
-`;
-
-const DetailCardWrapper = styled.div`
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  padding: 10px;
-  z-index: 100;
-
-  > li {
-    box-shadow: 3px 4px 4px #0f221626;
-  }
-`;

@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
-import styled from "styled-components";
-import DropDown from "../../components/DropDown";
-import { PRODUCT_LIST, RECYCLE_LIST } from "../../const/const";
-import CardList from "../../components/CardList";
-import TxtNoCompList from "../../components/TxtNoCompList";
+import DropDown from "../../components/DropDown/DropDown";
+import { PRODUCT_LIST, RECYCLE_LIST } from "../../const/keywordList";
+import CardList from "../../components/CardList/CardList";
+import NoCompListTxt from "../../components/TxtNoCompList/noCompListTxt";
 import * as mockData from "../../mockData";
+import * as S from "./index.style";
 
 const Index = () => {
   const [productSelect, setProductSelect] = useState("");
@@ -28,10 +28,10 @@ const Index = () => {
   };
 
   return (
-    <Wrapper>
-      <HiddenTitle>기업목록</HiddenTitle>
-      <CateWrapper>
-        <TxtSearchCount>전체 {list.length}개</TxtSearchCount>
+    <S.Wrapper>
+      <S.HiddenTitle>기업목록</S.HiddenTitle>
+      <S.CateWrapper>
+        <S.TxtSearchCount>전체 {list.length}개</S.TxtSearchCount>
         {list.length > 0 && (
           <>
             <DropDown
@@ -48,29 +48,10 @@ const Index = () => {
             />
           </>
         )}
-      </CateWrapper>
-      {list.length > 0 ? <CardList data={list} /> : <TxtNoCompList />}
-    </Wrapper>
+      </S.CateWrapper>
+      {list.length > 0 ? <CardList data={list} /> : <NoCompListTxt />}
+    </S.Wrapper>
   );
 };
 
 export default Index;
-
-const Wrapper = styled.section`
-  padding: 20px 16px 0;
-`;
-
-const HiddenTitle = styled.h2`
-  ${({ theme }) => theme.TEXT.hide};
-`;
-
-const CateWrapper = styled.div`
-  display: flex;
-  align-items: center;
-  margin-bottom: 12px;
-`;
-
-const TxtSearchCount = styled.p`
-  margin-right: auto;
-  ${({ theme }) => theme.TEXT.label12};
-`;
