@@ -5,6 +5,7 @@ import CardList from "../../components/CardList/CardList";
 import NoCompListTxt from "../../components/TxtNoCompList/noCompListTxt";
 import * as mockData from "../../mockData";
 import * as S from "./index.style";
+import mockRequest from "../../apis/mockRequest";
 
 const Index = () => {
   const [productSelect, setProductSelect] = useState("");
@@ -17,9 +18,7 @@ const Index = () => {
 
   const getList = async () => {
     if (process.env.NODE_ENV === "development") {
-      const res = await fetch("/list");
-      const json = await res.json();
-      const data = json.data;
+      const {data} = await mockRequest("/list");
       setList(data);
     } else {
       const mockList: any = mockData.list;

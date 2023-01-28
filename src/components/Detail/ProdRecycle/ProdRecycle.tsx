@@ -1,7 +1,7 @@
 import React from "react";
 import { DetailTitleH3, DetailWrapper } from "../../../style/style";
 import "react-toastify/dist/ReactToastify.css";
-import RecycleList from "../../RecycleList/RecycleList.style";
+import RecycleList from "../../RecycleList/RecycleList";
 import * as S from "./ProdRecycle.style";
 
 const CompRecycle = () => {

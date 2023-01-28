@@ -3,7 +3,7 @@ import { DetailTitleH3, DetailWrapper } from "../../../style/style";
 import { OneWayButton } from "../../Button/Button";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import RecycleList from "../../RecycleList/RecycleList.style";
+import RecycleList from "../../RecycleList/RecycleList";
 import * as S from "./CompRecycle.style";
 
 const CompRecycle = () => {

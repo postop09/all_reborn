@@ -5,7 +5,7 @@ import { CardProps } from "../../types/type";
 import ILike from "../../assets/icon/icon_like.png";
 import ILikeE from "../../assets/icon/icon_like_empty.png";
 import { onChangeLikes, onCheckLikes } from "../../util/handleLikes";
-import RecycleList from "../RecycleList/RecycleList.style";
+import RecycleList from "../RecycleList/RecycleList";
 import { useNavigate } from "react-router-dom";
 import * as S from "./Card.style";
 
