@@ -1,22 +1,12 @@
-import React, { useContext } from "react";
+import React from "react";
 import { Icon16, TitleH3 } from "../../../style/style";
 import IClose from "../../../assets/icon/icon_close.png";
 import { TwoWayButton } from "../../../components/Button/Button";
-import { AppContext } from "../../../context/AppContext";
 import * as S from "./RecentList.style";
+import usePopKeyword from "./hook/usePopKeyword";
 
 const RecentList = () => {
-  const { recentKeyword, setRecentKeyword }: any = useContext(AppContext);
-
-  const popKeyword = (keyword: string) => {
-    const storage = localStorage.getItem("recentKeyword");
-    if (storage) {
-      const arr = JSON.parse(storage);
-      const filter = arr.filter((item: string) => item !== keyword);
-      localStorage.setItem("recentKeyword", JSON.stringify(filter));
-      setRecentKeyword(filter);
-    }
-  };
+  const {recentKeyword, popKeyword} = usePopKeyword();
 
   if (recentKeyword.length > 0) {
     const reverseList = [...recentKeyword].reverse();

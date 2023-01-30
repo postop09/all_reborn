@@ -3,8 +3,6 @@ import mockRequest from "../../../apis/mockRequest";
 import * as mockData from "../../../mockData";
 
 const useGetCompList = () => {
-  const [productSelect, setProductSelect] = useState("");
-  const [recycleSelect, setRecycleSelect] = useState("");
   const [list, setList] = useState([]);
 
   useEffect(() => {
@@ -21,7 +19,7 @@ const useGetCompList = () => {
     }
   };
 
-  return {list, productSelect, setProductSelect, recycleSelect, setRecycleSelect};
+  return {list};
 };
 
 export default useGetCompList;

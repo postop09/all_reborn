@@ -1,63 +1,17 @@
-import React, { useEffect, useState } from "react";
-import DropDown from "../../components/DropDown/DropDown";
-import { PRODUCT_LIST, RECYCLE_LIST } from "../../const/keywordList";
+import React from "react";
 import INoLikes from "../../assets/image/img_noLikes.png";
-import * as mockData from "../../mockData";
-import { onGetLikes } from "../../util/handleLikes";
-import { CardProps } from "../../types/type";
 import CardSimple from "../../components/CardSimple/CardSimple";
 import * as S from "./index.style";
-
-interface List extends Array<CardProps> {}
+import useGetLikeList from "../Home/LikeList/hook/useGetLikeList";
+import CategoryWrapper from "../../components/CategoryWrapper/CategoryWrapper";
 
 const Index = () => {
-  const [productSelect, setProductSelect] = useState("");
-  const [recycleSelect, setRecycleSelect] = useState("");
-  const [list, setList] = useState<List>([]);
-
-  useEffect(() => {
-    onFilterLikes();
-  }, []);
-
-  const onFilterLikes = () => {
-    const storage = onGetLikes();
-    const data = mockData.list;
-    let newData: List = [];
-
-    if (storage) {
-      storage.map((likeId) => {
-        const findItem = data.find((item) => item.id === likeId);
-        if (findItem) {
-          newData.push(findItem);
-        }
-      });
-      setList(newData);
-    }
-    return;
-  };
+  const {list} = useGetLikeList();
 
   return (
     <S.Wrapper>
       <S.HiddenTitle>기업목록</S.HiddenTitle>
-      <S.CateWrapper>
-        <S.TxtSearchCount>전체 {list.length}개</S.TxtSearchCount>
-        {list.length > 0 && (
-          <>
-            <DropDown
-              list={PRODUCT_LIST}
-              select={productSelect}
-              setSelect={setProductSelect}
-              defaultValue={"제품 분야"}
-            />
-            <DropDown
-              list={RECYCLE_LIST}
-              select={recycleSelect}
-              setSelect={setRecycleSelect}
-              defaultValue={"재활용품 종류"}
-            />
-          </>
-        )}
-      </S.CateWrapper>
+      <CategoryWrapper listLength={list.length} />
       {list.length > 0 ? (
         <S.Ul>
           {list.map((item) => {
