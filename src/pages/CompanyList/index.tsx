@@ -1,30 +1,13 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import DropDown from "../../components/DropDown/DropDown";
 import { PRODUCT_LIST, RECYCLE_LIST } from "../../const/keywordList";
 import CardList from "../../components/CardList/CardList";
 import NoCompListTxt from "../../components/TxtNoCompList/noCompListTxt";
-import * as mockData from "../../mockData";
 import * as S from "./index.style";
-import mockRequest from "../../apis/mockRequest";
+import useGetCompList from "./hook/useGetCompList";
 
 const Index = () => {
-  const [productSelect, setProductSelect] = useState("");
-  const [recycleSelect, setRecycleSelect] = useState("");
-  const [list, setList] = useState([]);
-
-  useEffect(() => {
-    getList();
-  }, []);
-
-  const getList = async () => {
-    if (process.env.NODE_ENV === "development") {
-      const {data} = await mockRequest("/list");
-      setList(data);
-    } else {
-      const mockList: any = mockData.list;
-      setList(mockList);
-    }
-  };
+  const {list, productSelect, setProductSelect, recycleSelect, setRecycleSelect} = useGetCompList();
 
   return (
     <S.Wrapper>
