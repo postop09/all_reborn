@@ -2,7 +2,7 @@ import React from "react";
 import CardSimple from "../../../components/CardSimple/CardSimple";
 import { TitleH3 } from "../../../style/style";
 import * as S from "./LikeList.style";
-import useGetLikeList from "./hook/useGetLikeList";
+import useGetLikeList from "../../../hooks/home/useGetLikeList";
 
 const LikesList = () => {
   const {list} = useGetLikeList();

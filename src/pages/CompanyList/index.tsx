@@ -2,7 +2,7 @@ import React from "react";
 import CardList from "../../components/CardList/CardList";
 import NoCompListTxt from "../../components/TxtNoCompList/noCompListTxt";
 import * as S from "./index.style";
-import useGetCompList from "./hook/useGetCompList";
+import useGetCompList from "../../hooks/companyList/useGetCompList";
 import CategoryWrapper from "../../components/CategoryWrapper/CategoryWrapper";
 
 const Index = () => {

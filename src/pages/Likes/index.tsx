@@ -2,7 +2,7 @@ import React from "react";
 import INoLikes from "../../assets/image/img_noLikes.png";
 import CardSimple from "../../components/CardSimple/CardSimple";
 import * as S from "./index.style";
-import useGetLikeList from "../Home/LikeList/hook/useGetLikeList";
+import useGetLikeList from "../../hooks/home/useGetLikeList";
 import CategoryWrapper from "../../components/CategoryWrapper/CategoryWrapper";
 
 const Index = () => {

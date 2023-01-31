@@ -3,7 +3,7 @@ import { Icon16, TitleH3 } from "../../../style/style";
 import IClose from "../../../assets/icon/icon_close.png";
 import { TwoWayButton } from "../../../components/Button/Button";
 import * as S from "./RecentList.style";
-import usePopKeyword from "./hook/usePopKeyword";
+import usePopKeyword from "../../../hooks/search/usePopKeyword";
 
 const RecentList = () => {
   const {recentKeyword, popKeyword} = usePopKeyword();

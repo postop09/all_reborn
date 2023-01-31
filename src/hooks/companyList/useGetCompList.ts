@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
-import mockRequest from "../../../apis/mockRequest";
-import * as mockData from "../../../mockData";
+import mockRequest from "../../apis/mockRequest";
+import * as mockData from "../../mockData";
 
 const useGetCompList = () => {
   const [list, setList] = useState([]);

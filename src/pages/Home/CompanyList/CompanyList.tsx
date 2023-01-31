@@ -3,7 +3,7 @@ import CardList from "../../../components/CardList/CardList";
 import { TitleH3 } from "../../../style/style";
 import NoCompListTxt from "../../../components/TxtNoCompList/noCompListTxt";
 import * as S from "./CompanyList.style";
-import useGetCompList from "../../CompanyList/hook/useGetCompList";
+import useGetCompList from "../../../hooks/companyList/useGetCompList";
 
 const CompanyList = () => {
   const {list} = useGetCompList();

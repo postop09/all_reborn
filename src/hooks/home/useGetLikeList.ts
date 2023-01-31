@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
-import { onGetLikes } from "../../../../util/handleLikes";
-import * as mockData from "../../../../mockData";
-import { CardProps } from "../../../../types/type";
+import { onGetLikes } from "../../util/handleLikes";
+import * as mockData from "../../mockData";
+import { CardProps } from "../../types/type";
 
 interface List extends Array<CardProps> {}
 
