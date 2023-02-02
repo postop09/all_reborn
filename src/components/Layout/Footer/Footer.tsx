@@ -1,23 +1,16 @@
-import React, { useEffect, useState } from "react";
-import * as enums from "../../../const/routes";
+import React from "react";
+import { ROUTES } from "../../../const/routes";
 import IHome from "../../../assets/icon/icon_home.png";
 import IHomeE from "../../../assets/icon/icon_home_empty.png";
 import IMap from "../../../assets/icon/icon_mappin.png";
 import IMapE from "../../../assets/icon/icon_mappin_empty.png";
 import ILikes from "../../../assets/icon/icon_heart_black.png";
 import ILikesE from "../../../assets/icon/icon_heart_empty.png";
-import { useNavigate } from "react-router-dom";
 import * as S from "./Footer.style";
+import useSetPathName from "../../../hooks/components/layout/useSetPathName";
 
 const Footer = () => {
-  const { ROUTES } = enums;
-  const navigate = useNavigate();
-  const [pathName, setPathName] = useState("");
-
-  useEffect(() => {
-    const pathName = window.location.pathname;
-    setPathName(pathName);
-  }, [window.location.pathname]);
+  const {pathName, navigate} =useSetPathName();
 
   return (
     <S.FooterWrapper>

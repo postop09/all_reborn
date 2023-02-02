@@ -1,26 +1,22 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Icon16, Img24, Img40 } from "../../../style/style";
-import { useNavigate } from "react-router-dom";
 import ILogo from "../../../assets/image/img_logo.png";
 import ITitle from "../../../assets/image/img_title.png";
 import ISearch from "../../../assets/icon/icon_search.png";
 import IReturn from "../../../assets/icon/icon_return.png";
-import * as enums from "../../../const/routes";
+import { ROUTES } from "../../../const/routes";
 import { AppContext } from "../../../context/AppContext";
 import getQuery from "../../../util/getQuery";
 import * as S from "./Header.style";
+import useSetPathName from "../../../hooks/components/layout/useSetPathName";
 
 const Header = () => {
-  const navigate = useNavigate();
-  const { ROUTES } = enums;
+  const {pathName, navigate} = useSetPathName();
   const { setRecentKeyword, setSearchList, setSearchCase }: any = useContext(AppContext);
-  const [pathName, setPathName] = useState("");
   const [search, setSearch] = useState("");
   const [title, setTitle] = useState<string | null>("");
 
   useEffect(() => {
-    const pathName = window.location.pathname;
-    setPathName(pathName);
     setTitle(getQuery());
   }, [getQuery(), window.location.pathname]);
 
