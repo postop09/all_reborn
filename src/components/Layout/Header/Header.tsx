@@ -1,24 +1,19 @@
-import React, { useContext, useEffect, useState } from "react";
+import React from "react";
 import { Icon16, Img24, Img40 } from "../../../style/style";
 import ILogo from "../../../assets/image/img_logo.png";
 import ITitle from "../../../assets/image/img_title.png";
 import ISearch from "../../../assets/icon/icon_search.png";
 import IReturn from "../../../assets/icon/icon_return.png";
 import { ROUTES } from "../../../const/routes";
-import { AppContext } from "../../../context/AppContext";
-import getQuery from "../../../util/getQuery";
 import * as S from "./Header.style";
 import useSetPathName from "../../../hooks/components/layout/useSetPathName";
+import useRecentKeyword from "../../../hooks/components/layout/useRecentKeyword";
+import useHeader from "../../../hooks/components/layout/useHeader";
 
 const Header = () => {
-  const {pathName, navigate} = useSetPathName();
-  const { setRecentKeyword, setSearchList, setSearchCase }: any = useContext(AppContext);
-  const [search, setSearch] = useState("");
-  const [title, setTitle] = useState<string | null>("");
-
-  useEffect(() => {
-    setTitle(getQuery());
-  }, [getQuery(), window.location.pathname]);
+  const { pathName, navigate } = useSetPathName();
+  const { search, setSearch, pushRecentKeyword } = useRecentKeyword();
+  const { title, fetchSearchList } = useHeader();
 
   // 검색
   const onSearch = (e: React.FormEvent) => {
@@ -26,36 +21,6 @@ const Header = () => {
     pushRecentKeyword();
     fetchSearchList(search);
     setSearch("");
-  };
-
-  const pushRecentKeyword = () => {
-    const storage = localStorage.getItem("recentKeyword");
-
-    if (storage) {
-      const arr = JSON.parse(storage);
-      const filter = arr.filter((item: string) => item !== search);
-      filter.push(search);
-      localStorage.setItem("recentKeyword", JSON.stringify(filter));
-      setRecentKeyword(filter);
-    }
-  };
-
-  const fetchSearchList = async (path: string) => {
-    try {
-      const res = await fetch(`/${path}`);
-      const json = await res.json();
-      const data = json.data;
-      if (data.length === 0) {
-        setSearchList([path]);
-        setSearchCase("noData");
-      } else {
-        setSearchList(data);
-        setSearchCase("hasData");
-      }
-    } catch (e) {
-      setSearchList([path]);
-      setSearchCase("noData");
-    }
   };
 
   return (
